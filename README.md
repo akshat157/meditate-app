@@ -29,6 +29,6 @@ Your app is ready to be deployed!
 
 ## Acknowledgments
 Shoutouts to
-* [Dev Ed](https://www.youtube.com/channel/UClb90NQQcskPUGDIXsQEz5Q)'s amazing (tutorial)[https://www.youtube.com/watch?v=oMBXdZzYqEk] for the same project but using vanilla JS, HTML and CSS.
+* [Dev Ed](https://www.youtube.com/channel/UClb90NQQcskPUGDIXsQEz5Q)'s amazing [tutorial](https://www.youtube.com/watch?v=oMBXdZzYqEk) for the same project but using vanilla JS, HTML and CSS.
 * My friend [@Adi2612](https://github.com/Adi2612/) for helping me solve some major issues.
 * Google, Stackoverflow and the whole open source community! <3
