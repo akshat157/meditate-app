@@ -24,11 +24,11 @@ The build is minified and the filenames include the hashes.<br>
 Your app is ready to be deployed!
 
 ## Resources
-* (react-circular-progressbar)[https://github.com/kevinsqi/react-circular-progressbar], used this react component to make the seek for audio.
-* (react-sound)[https://github.com/leoasis/react-sound] component. Used this to make the whole sound component and perform operations on it.-
+* [react-circular-progressbar](https://github.com/kevinsqi/react-circular-progressbar), used this react component to make the seek for audio.
+* [react-sound](https://github.com/leoasis/react-sound) component. Used this to make the whole sound component and perform operations on it.-
 
 ## Acknowledgments
 Shoutouts to
-* (Dev Ed)[https://www.youtube.com/channel/UClb90NQQcskPUGDIXsQEz5Q]'s amazing (tutorial)[https://www.youtube.com/watch?v=oMBXdZzYqEk] for the same project but using vanilla JS, HTML and CSS.
-* My friend (@Adi2612)[https://github.com/Adi2612/] for helping me solve some major issues.
+* [Dev Ed](https://www.youtube.com/channel/UClb90NQQcskPUGDIXsQEz5Q)'s amazing (tutorial)[https://www.youtube.com/watch?v=oMBXdZzYqEk] for the same project but using vanilla JS, HTML and CSS.
+* My friend [@Adi2612](https://github.com/Adi2612/) for helping me solve some major issues.
 * Google, Stackoverflow and the whole open source community! <3
