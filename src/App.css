@@ -1,33 +1,109 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.bg {
+  width: 100%;
+  height: 100%;
+  z-index: -10;
+  position: fixed;
+}
+
+.bg-overlay {
+  background-color: #0f0f0f99;
+  width: 100%;
+  height: 100%;
+  z-index: -5;
+  position: absolute;
+}
+
+.bg img {
+  width: 100%;
+  background-position: center bottom; 
+}
+
+button {
+  background: none;
+  border: 2px #ffffffcc solid;
+  padding: 16px;
+  width: 130px;
+  /* box-shadow: #000000fa 1px 1px 2px 0; */
+  border-radius: 2%;
+  color: #fff;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  box-shadow: none;
+  color: #000;
+  background-color: #ffffffcc;
+  border: none;
+  width: 140px;
+  padding: 24px;
+  font-size: 17px;
+}
+
+button .active {
+  box-shadow: none;
+  color: #000;
+  background-color: #ffffffcc;
+  border: none;
+  width: 140px;
+  padding: 24px;
+  font-size: 17px;
+}
+
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
-  flex-direction: column;
+  justify-content: space-evenly;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+}
+
+.time-menu, .player-container, .audio-menu {
+  flex: 1;
+  height: 90%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+}
+
+.time-menu {
+  /* background-color: #ffafaf;  */
+}
+
+.player-container {
+  /* background-color: #afafff; */
+  position: relative;
+}
+
+.player-container .play, .player-container .audioSeek {
+  position: absolute;
+}
+
+.player-container .timer {
+  position: absolute;
+  bottom: 10%;
+}
+
+.audio-menu {
+  /* background-color: #afffaf;  */
+}
+
+.playPause {
+  width: 40px;
+  z-index: 10;
+}
+
+.audioSeek {
+  width: 60%;
+}
+
+.timer {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 32px;
   color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }
