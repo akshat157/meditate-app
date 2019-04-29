@@ -25,7 +25,9 @@ Your app is ready to be deployed!
 
 ## Resources
 * [react-circular-progressbar](https://github.com/kevinsqi/react-circular-progressbar), used this react component to make the seek for audio.
-* [react-sound](https://github.com/leoasis/react-sound) component. Used this to make the whole sound component and perform operations on it.-
+* [react-sound](https://github.com/leoasis/react-sound) component. Used this to make the whole sound component and perform operations on it.
+* All sounds were downloaded from https://www.zapsplat.com/ and belong to their respective owners.
+* Background images were downloaded from [Google Images](https://images.google.com) and belong to the respective owners.
 
 ## Acknowledgments
 Shoutouts to
