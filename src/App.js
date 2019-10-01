@@ -34,12 +34,14 @@ class App extends Component {
       audioUrl            : rainAudio,  // Default
       bgImg               : rainImg,
       desiredTime         : 120,        // Default
+      selectedTime        : 120,
+      selectedAudio       : 'Rain'
     }
   }
 
   timeSelect(x) {
     this.setState({
-      desiredTime : x.duration
+      desiredTime : x.duration,
     });
   }
 
@@ -63,28 +65,33 @@ class App extends Component {
 
     if (x === this.state.audioNames[1]){
       this.setState({
-        audioUrl  : forestAudio,
-        bgImg     : forestImg
+        audioUrl      : forestAudio,
+        bgImg         : forestImg,
+        selectedAudio : x
       });
     }else if (x === this.state.audioNames[2]) {
       this.setState({
-        audioUrl  : parkAudio,
-        bgImg     : parkImg
+        audioUrl      : parkAudio,
+        bgImg         : parkImg,
+        selectedAudio : x
       });
     }else if (x === this.state.audioNames[3]) {
       this.setState({
-        audioUrl  : streamAudio,
-        bgImg     : streamImg
+        audioUrl      : streamAudio,
+        bgImg         : streamImg,
+        selectedAudio : x
       });
     }else if (x === this.state.audioNames[4]) {
       this.setState({
-        audioUrl  : wavesAudio,
-        bgImg     : wavesImg
+        audioUrl      : wavesAudio,
+        bgImg         : wavesImg,
+        selectedAudio : x
       });
     }else {
       this.setState({
-        audioUrl  : rainAudio,
-        bgImg     : rainImg
+        audioUrl      : rainAudio,
+        bgImg         : rainImg,
+        selectedAudio : x
       });
     }
   }
@@ -99,12 +106,14 @@ class App extends Component {
   }
   render() {
     console.log(this.state.timeBtnClass);
+    const { selectedAudio, desiredTime } = this.state
+
     const timeOptions = this.state.timeValues.map((duration) =>
-      <button key={duration} onClick={ () => {this.timeSelect({duration})} }>{duration/60} Minutes</button>
+      <button key={duration} onClick={ () => {this.timeSelect({duration})} } className={desiredTime === duration ? 'selected-option' : undefined}>{duration/60} Minutes</button>
     );
 
     const audioOptions = this.state.audioNames.map((audioName) =>
-      <button key={audioName} onClick={ () => {this.audioSelect({audioName})} }>{audioName}</button>
+      <button key={audioName} onClick={ () => {this.audioSelect({audioName})} } className={selectedAudio === audioName ? 'selected-option' : undefined}>{audioName}</button>
     );
 
     return (
