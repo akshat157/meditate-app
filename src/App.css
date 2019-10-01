@@ -62,6 +62,10 @@ button .active {
   align-items: center;
 }
 
+.immersive {
+  visibility: hidden;
+}
+
 .time-menu, .player-container, .audio-menu {
   flex: 1;
   height: 90%;

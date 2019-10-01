@@ -6,6 +6,8 @@ import SoundComponent from './playSound';
 import 'react-circular-progressbar/dist/styles.css';
 import './App.css';
 
+const ESCAPE_KEY = 27;
+
 const playButton = 'svg/play.svg';
 const pauseButton = 'svg/pause.svg';
 
@@ -34,6 +36,7 @@ class App extends Component {
       audioUrl            : rainAudio,  // Default
       bgImg               : rainImg,
       desiredTime         : 120,        // Default
+      immersiveMode       : false       // Default
     }
   }
 
@@ -97,6 +100,25 @@ class App extends Component {
     }
     
   }
+
+  toggleImmersive(){
+    this.setState({immersiveMode : !this.state.immersiveMode});
+  }
+
+  _handleKeyDown = (event) => {
+    switch( event.keyCode ) {
+      case ESCAPE_KEY:
+        this.toggleImmersive();
+        break;
+      default:
+        break;
+    }
+  }
+
+  componentDidMount(){
+    document.addEventListener("keydown", this._handleKeyDown);
+  }
+
   render() {
     console.log(this.state.timeBtnClass);
     const timeOptions = this.state.timeValues.map((duration) =>
@@ -113,10 +135,10 @@ class App extends Component {
         <div className="bg">
           <img src={this.state.bgImg} alt=""/>
         </div>
-        <div className="time-menu">
+        <div className={"time-menu " + (this.state.immersiveMode ? "immersive" : "")}>
           {timeOptions}
         </div>
-        <div className="player-container">
+        <div className={"player-container " + (this.state.immersiveMode ? "immersive" : "")}>
           <img className="playPause" src={this.state.pbuttonUrl} alt="Play" onClick={ (e) => {this.playPause()} }/>
         <div className="audioSeek">
           <StyledProgressbar id='seek' percentage={this.state.seekCurrentPosition} />
@@ -126,7 +148,7 @@ class App extends Component {
         <div className="timer">00 : 00</div>
         </div>
         
-        <div className="audio-menu">
+        <div className={"audio-menu " + (this.state.immersiveMode ? "immersive" : "")}>
           {audioOptions}
         </div>
       </div>
