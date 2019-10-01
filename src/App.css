@@ -55,6 +55,16 @@ button .active {
   font-size: 17px;
 }
 
+.selected-option {
+  box-shadow: none;
+  color: #000;
+  background-color: #ffffffcc;
+  border: none;
+  width: 140px;
+  padding: 24px;
+  font-size: 17px;
+}
+
 .App {
   height: 100vh;
   display: flex;
