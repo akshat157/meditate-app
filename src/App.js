@@ -104,7 +104,7 @@ class App extends Component {
     );
 
     const audioOptions = this.state.audioNames.map((audioName) =>
-      <button key={audioName} className={ this.state.audioUrl === "audio/" + audioName.toLowerCase() + ".mp3" } onClick={ () => {this.audioSelect({audioName})} }>{audioName}</button>
+      <button key={audioName} className={ this.state.audioUrl === "audio/" + audioName.toLowerCase() + ".mp3" ? "active" : "" } onClick={ () => {this.audioSelect({audioName})} }>{audioName}</button>
     );
 
     return (
