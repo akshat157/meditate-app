@@ -29,6 +29,9 @@ Your app is ready to be deployed!
 * All sounds were downloaded from https://www.zapsplat.com/ and belong to their respective owners.
 * Background images were downloaded from [Google Images](https://images.google.com) and belong to the respective owners.
 
+## Contribute to this project
+Feel free to contributing to this project! Please read [CONTRIBUTING.md](https://github.com/akshat157/meditate-app/blob/master/CONTRIBUTING.md) to know the basic guidelines. :)
+
 ## Acknowledgments
 Shoutouts to
 * [Dev Ed](https://www.youtube.com/channel/UClb90NQQcskPUGDIXsQEz5Q)'s amazing [tutorial](https://www.youtube.com/watch?v=oMBXdZzYqEk) for the same project but using vanilla JS, HTML and CSS.
