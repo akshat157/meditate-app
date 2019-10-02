@@ -32,6 +32,7 @@ class SoundComponent extends Component {
         // onLoading={this.handleSongLoading}
         onPlaying={this.handleSongPlaying}
         // onFinishedPlaying={this.handleSongFinishedPlaying}
+        volume={this.props.volume}
       />
     );
   }

@@ -7,6 +7,8 @@ Change to the project directory
 `cd meditate-app`
 In the project directory, you can run:
 
+Run `npm install` to install `node_modules`. You may receive an error telling you `node_modules` missing otherwise.
+
 ### `npm start`
 
 Runs the app in the development mode.<br>
