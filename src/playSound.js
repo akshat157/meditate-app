@@ -39,6 +39,7 @@ class SoundComponent extends Component {
         }
         onStop={() => this.setState({ loopCount: 0, position: 0 })}
         position={this.state.position}
+        volume={this.props.volume}
       />
     )
   }
