@@ -107,3 +107,26 @@ button .active {
   font-size: 32px;
   color: white;
 }
+
+.quote {
+  position: absolute;
+  top: 4%;
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 2em;
+  z-index: 1;
+  padding-bottom: 5vh;
+  width: 35%
+}
+
+.quote-text {
+  font-weight: light;
+  font-style: italic;
+  font-size: 2vh;
+}
+
+.quote-author {
+  position: absolute;
+  font-size: 1.8vh;
+  left: 50%;
+}

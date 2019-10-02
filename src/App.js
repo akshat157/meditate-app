@@ -5,6 +5,7 @@ import Sound from 'react-sound';
 import SoundComponent from './playSound';
 import 'react-circular-progressbar/dist/styles.css';
 import './App.css';
+import { quotes } from './quoteList';
 
 const playButton = 'svg/play.svg';
 const pauseButton = 'svg/pause.svg';
@@ -34,6 +35,7 @@ class App extends Component {
       audioUrl            : rainAudio,  // Default
       bgImg               : rainImg,
       desiredTime         : 120,        // Default
+      quote               : quotes[0],
     }
   }
 
@@ -97,6 +99,17 @@ class App extends Component {
     }
     
   }
+
+  changeQuote(){
+    let newQuote = quotes[Math.floor(Math.random() * quotes.length-1)] || quotes[0];
+    if(newQuote.quote.length > 150)
+      this.changeQuote();
+    else
+      this.setState({
+        quote: newQuote
+      });
+  }
+
   render() {
     console.log(this.state.timeBtnClass);
     const timeOptions = this.state.timeValues.map((duration) =>
@@ -113,9 +126,15 @@ class App extends Component {
         <div className="bg">
           <img src={this.state.bgImg} alt=""/>
         </div>
+        <div onClick={this.changeQuote.bind(this)} className="quote">
+          <span className="quote-text">{this.state.quote.quote}</span>
+          <br/>
+          <span className="quote-author">{this.state.quote.author}</span>
+        </div>
         <div className="time-menu">
           {timeOptions}
         </div>
+        
         <div className="player-container">
           <img className="playPause" src={this.state.pbuttonUrl} alt="Play" onClick={ (e) => {this.playPause()} }/>
         <div className="audioSeek">
