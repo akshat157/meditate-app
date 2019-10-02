@@ -26,7 +26,7 @@ const parkImg = 'img/park.jpg';
 const streamImg = 'img/stream.jpg';
 const wavesImg = 'img/waves.jpg';
 
-const QUOTE_CHANGE_INTERVAL_TIME = 3000;
+const QUOTE_CHANGE_INTERVAL_TIME = 15000;
 
 class App extends Component {
 
