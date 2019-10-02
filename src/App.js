@@ -22,7 +22,7 @@ const parkImg = 'img/park.jpg';
 const streamImg = 'img/stream.jpg';
 const wavesImg = 'img/waves.jpg';
 
-const QUOTE_CHANGE_INTERVAL = 15000;
+const QUOTE_CHANGE_INTERVAL_TIME = 3000;
 
 class App extends Component {
 
@@ -38,7 +38,12 @@ class App extends Component {
       bgImg               : rainImg,
       desiredTime         : 120,        // Default
       quote               : quotes[0],
+      quoteInterval       : () => this.changeQuote()
     }
+  }
+
+  componentDidMount() {
+    this.interval = setInterval(this.state.quoteInterval, QUOTE_CHANGE_INTERVAL_TIME);
   }
 
   timeSelect(x) {
@@ -103,6 +108,10 @@ class App extends Component {
   }
 
   changeQuote(){
+    //Reset interval
+    clearInterval(this.interval);
+    this.interval = setInterval(this.state.quoteInterval, QUOTE_CHANGE_INTERVAL_TIME);
+
     let newQuote = quotes[Math.floor(Math.random() * quotes.length-1)] || quotes[0];
     if(newQuote.quote.length > 150)
       this.changeQuote();
@@ -121,10 +130,6 @@ class App extends Component {
     const audioOptions = this.state.audioNames.map((audioName) =>
       <button key={audioName} onClick={ () => {this.audioSelect({audioName})} }>{audioName}</button>
     );
-
-    setInterval(() => {
-      this.changeQuote();
-    }, QUOTE_CHANGE_INTERVAL);
 
     return (
       <div className="App">
