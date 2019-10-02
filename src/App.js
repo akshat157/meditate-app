@@ -115,12 +115,14 @@ class App extends Component {
   }
 
   changeQuote(){
+    const QUOTE_CHARACTER_LIMIT = window.visualViewport.width < 768 ? 90 : 150;
+
     //Reset interval
     clearInterval(this.interval);
     this.interval = setInterval(this.state.quoteInterval, QUOTE_CHANGE_INTERVAL_TIME);
 
     let newQuote = quotes[Math.floor(Math.random() * quotes.length-1)] || quotes[0];
-    if(newQuote.quote.length > 150)
+    if(newQuote.quote.length > QUOTE_CHARACTER_LIMIT)
       this.changeQuote();
     else
       this.setState({

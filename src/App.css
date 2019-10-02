@@ -124,7 +124,7 @@ button .active {
 
 .quote {
   position: absolute;
-  top: 5%;
+  top: 6%;
   color: white;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   line-height: 2em;
@@ -143,4 +143,26 @@ button .active {
   position: absolute;
   font-size: 2.5vh;
   left: 45%;
+}
+
+@media (max-width: 767px){
+  .quote {
+    position: absolute;
+    top: 5%;
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 2em;
+    z-index: 1;
+    padding-bottom: 5vh;
+    width: 30%
+  }
+
+  .quote-text {
+    font-size: 2.5vh;
+  }
+  
+  .quote-author {
+    font-size: 2vh;
+    left: 5%;
+  }
 }
