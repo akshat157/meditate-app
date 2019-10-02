@@ -117,12 +117,13 @@ class App extends Component {
       this.setState({
         quote: newQuote
       });
+  }
   
   volumeChange = (event) => {
     let newVolume = event.target.value;
     this.setState({
       volume: this.state.mute ? this.state.volume : newVolume,
-      volumeIcon: this.state.mute || newVolume === 0 ? noVolumeIcon : newVolume <= 50 ? quietVolumeIcon : loudVolumeIcon
+      volumeIcon: this.state.mute || newVolume === 0 ? noVolumeIcon : newVolume <= 50 ? quietVolumeIcon : loudVolumeIcon,
     });
   }
 
