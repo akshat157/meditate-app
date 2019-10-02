@@ -10,6 +10,10 @@ import { quotes } from './quoteList';
 const playButton = 'svg/play.svg';
 const pauseButton = 'svg/pause.svg';
 
+const loudVolumeIcon = "svg/volume-2.svg";
+const quietVolumeIcon = "svg/volume-1.svg";
+const noVolumeIcon = "svg/volume-x.svg";
+
 const rainAudio = 'audio/rain.mp3';
 const forestAudio = 'audio/forest.mp3';
 const parkAudio = 'audio/park.mp3';
@@ -34,10 +38,13 @@ class App extends Component {
       timeValues          : [120, 300, 600, 900],
       audioNames          : ["Rain", "Forest", "Park", "Stream", "Waves"],
       seekCurrentPosition : 0,
-      audioUrl            : rainAudio,  // Default
+      audioUrl            : rainAudio,      // Default
       bgImg               : rainImg,
-      desiredTime         : 120,        // Default
+      desiredTime         : 120,            // Default
       quote               : quotes[0],
+      volume              : 100,            // Default
+      mute                : false,          // Default
+      volumeIcon          : loudVolumeIcon,
     }
   }
 
@@ -102,7 +109,7 @@ class App extends Component {
     
   }
 
-  changeQuote(){
+  changeQuote() {
     let newQuote = quotes[Math.floor(Math.random() * quotes.length-1)] || quotes[0];
     if(newQuote.quote.length > 150)
       this.changeQuote();
@@ -110,6 +117,20 @@ class App extends Component {
       this.setState({
         quote: newQuote
       });
+  
+  volumeChange = (event) => {
+    let newVolume = event.target.value;
+    this.setState({
+      volume: this.state.mute ? this.state.volume : newVolume,
+      volumeIcon: this.state.mute || newVolume === 0 ? noVolumeIcon : newVolume <= 50 ? quietVolumeIcon : loudVolumeIcon
+    });
+  }
+
+  toggleMute() {
+    this.setState({
+      volumeIcon: !this.state.mute ? noVolumeIcon : this.state.volume <= 50 ? quietVolumeIcon : loudVolumeIcon,
+      mute: !this.state.mute,
+    });
   }
 
   render() {
@@ -143,11 +164,20 @@ class App extends Component {
         
         <div className="player-container">
           <img className="playPause" src={this.state.pbuttonUrl} alt="Play" onClick={ (e) => {this.playPause()} }/>
+
+        <div className="volume-control">
+          <img onClick={this.toggleMute.bind(this)} className="volume-icon" src={this.state.volumeIcon}/>
+          &nbsp;
+          <div className="volume-slider">
+            <input onChange={this.volumeChange} className="volume" type={"range"} step={1} min={0} value={this.state.mute ? 0 : this.state.volume} max={100}></input>
+          </div>
+        </div>
+        
         <div className="audioSeek">
           <StyledProgressbar id='seek' percentage={this.state.seekCurrentPosition} />
         </div>
 
-        <SoundComponent playStatus={this.state.audioStatus} url={this.state.audioUrl} funcPerc={this.moveSeek.bind(this)} desiredT={this.state.desiredTime} />
+        <SoundComponent playStatus={this.state.audioStatus} url={this.state.audioUrl} funcPerc={this.moveSeek.bind(this)} desiredT={this.state.desiredTime} volume={this.state.mute ? 0 : this.state.volume} />
         <div className="timer">00 : 00</div>
         </div>
         
