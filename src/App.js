@@ -160,9 +160,9 @@ class App extends Component {
           <img src={this.state.bgImg} alt=""/>
         </div>
         <div onClick={this.changeQuote.bind(this)} className="quote">
-          <span className="quote-text">{this.state.quote.quote}</span>
+          <span className="quote-text">“&nbsp;{this.state.quote.quote} ”</span>
           <br/>
-          <span className="quote-author">{this.state.quote.author}</span>
+          <span className="quote-author">-&nbsp;{this.state.quote.author}</span>
         </div>
         <div className="time-menu">
           {timeOptions}
