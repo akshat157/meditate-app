@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 // import logo from './logo.svg';
 import StyledProgressbar from './StyledProgressbar';
 import Sound from 'react-sound';
+
 import SoundComponent from './playSound';
 import 'react-circular-progressbar/dist/styles.css';
 import './App.css';
@@ -58,6 +59,17 @@ class App extends Component {
     }
   }
 
+  
+  endSession(){
+
+    this.setState({
+      audioStatus: Sound.status.STOPPED
+    });
+    this.moveSeek(0);
+    document.getElementById('timer').innerHTML= "00 : 00";
+
+  }
+ 
   audioSelect(name) {
     var x = JSON.stringify(name.audioName).replace(/["]+/g, '');
 
@@ -123,11 +135,14 @@ class App extends Component {
         </div>
 
         <SoundComponent playStatus={this.state.audioStatus} url={this.state.audioUrl} funcPerc={this.moveSeek.bind(this)} desiredT={this.state.desiredTime} />
-        <div className="timer">00 : 00</div>
+        <div id="timer" className="timer">00 : 00</div>
         </div>
         
         <div className="audio-menu">
           {audioOptions}
+        </div>
+        <div>
+          <button className="button" onClick={this.endSession.bind(this)}>Stop</button>
         </div>
       </div>
     );
