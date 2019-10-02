@@ -8,6 +8,9 @@
   height: 100%;
   z-index: -10;
   position: fixed;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
 
 .bg-overlay {
@@ -20,7 +23,7 @@
 
 .bg img {
   width: 100%;
-  background-position: center bottom; 
+  background-position: center bottom;
 }
 
 button {
@@ -62,7 +65,9 @@ button .active {
   align-items: center;
 }
 
-.time-menu, .player-container, .audio-menu {
+.time-menu,
+.player-container,
+.audio-menu {
   flex: 1;
   height: 90%;
   display: flex;
@@ -80,7 +85,8 @@ button .active {
   position: relative;
 }
 
-.player-container .play, .player-container .audioSeek {
+.player-container .play,
+.player-container .audioSeek {
   position: absolute;
 }
 
