@@ -22,6 +22,8 @@ const parkImg = 'img/park.jpg';
 const streamImg = 'img/stream.jpg';
 const wavesImg = 'img/waves.jpg';
 
+const QUOTE_CHANGE_INTERVAL = 15000;
+
 class App extends Component {
 
   constructor(props) {
@@ -119,6 +121,10 @@ class App extends Component {
     const audioOptions = this.state.audioNames.map((audioName) =>
       <button key={audioName} onClick={ () => {this.audioSelect({audioName})} }>{audioName}</button>
     );
+
+    setInterval(() => {
+      this.changeQuote();
+    }, QUOTE_CHANGE_INTERVAL);
 
     return (
       <div className="App">
