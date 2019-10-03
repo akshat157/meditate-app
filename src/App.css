@@ -20,7 +20,7 @@
 
 .bg img {
   width: 100%;
-  background-position: center bottom; 
+  background-position: center bottom;
 }
 
 button {
@@ -55,6 +55,16 @@ button .active {
   font-size: 17px;
 }
 
+.active {
+  box-shadow: none;
+  color: #000;
+  background-color: #ffffffcc;
+  border: none;
+  width: 140px;
+  padding: 24px;
+  font-size: 17px;
+}
+
 .App {
   height: 100vh;
   display: flex;
@@ -62,7 +72,9 @@ button .active {
   align-items: center;
 }
 
-.time-menu, .player-container, .audio-menu {
+.time-menu,
+.player-container,
+.audio-menu {
   flex: 1;
   height: 90%;
   display: flex;
@@ -80,7 +92,8 @@ button .active {
   position: relative;
 }
 
-.player-container .play, .player-container .audioSeek {
+.player-container .play,
+.player-container .audioSeek {
   position: absolute;
 }
 
@@ -117,7 +130,7 @@ button .active {
 }
 
 .timer {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-size: 32px;
   color: white;
 }
