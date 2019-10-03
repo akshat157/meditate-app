@@ -37,9 +37,12 @@ class App extends Component {
       audioUrl            : rainAudio,      // Default
       bgImg               : rainImg,
       desiredTime         : 120,            // Default
+      timeHovered         : false,
+      audioHovered        : false,
       volume              : 100,            // Default
       mute                : false,          // Default
       volumeIcon          : loudVolumeIcon,
+
     }
   }
 
@@ -106,6 +109,18 @@ class App extends Component {
     }
   }
 
+  handleTimeHover(){
+    this.setState({
+      timeHovered: !this.state.timeHovered
+    });
+  }
+
+  handleAudioHover(){
+    this.setState({
+      audioHovered: !this.state.audioHovered
+    });
+  }
+  
   volumeChange = (event) => {
     let newVolume = event.target.value;
     this.setState({
@@ -122,35 +137,22 @@ class App extends Component {
   }
 
   render() {
-    const timeOptions = this.state.timeValues.map(duration => (
-      <button
-        key={duration}
-        onClick={() => {
-          this.timeSelect({ duration })
-        }}
-      >
-        {duration / 60} Minutes
-      </button>
-    ))
 
-    const audioOptions = this.state.audioNames.map(audioName => (
-      <button
-        key={audioName}
-        onClick={() => {
-          this.audioSelect({ audioName })
-        }}
-      >
-        {audioName}
-      </button>
-    ))
+    console.log(this.state.timeBtnClass);
+    const timeOptions = this.state.timeValues.map((duration) =>
+      <button key={duration} onMouseEnter={this.handleTimeHover.bind(this)} onMouseLeave={this.handleTimeHover.bind(this)} className={ !this.state.timeHovered && duration === this.state.desiredTime 
+                                          ? "active" : "" } onClick={ () => {this.timeSelect({duration})} }>{duration/60} Minutes</button>
+    );
+
+    const audioOptions = this.state.audioNames.map((audioName) =>
+      <button key={audioName} onMouseEnter={this.handleAudioHover.bind(this)} onMouseLeave={this.handleAudioHover.bind(this)} className={ !this.state.audioHovered && this.state.audioUrl === "audio/" + audioName.toLowerCase() + ".mp3" 
+                                          ? "active" : "" } onClick={ () => {this.audioSelect({audioName})} }>{audioName}</button>
+    );
 
     return (
       <div className="App">
         <div className="bg-overlay"></div>
-        <div
-          className="bg"
-          style={{ backgroundImage: `url(${this.state.bgImg})` }}
-        />
+        <div className="bg" style={{ backgroundImage: `url(${this.state.bgImg})` }} />
         <div className="time-menu">{timeOptions}</div>
         <div className="player-container">
           <img className="playPause" src={this.state.pbuttonUrl} alt="Play" onClick={ (e) => {this.playPause()} }/>
