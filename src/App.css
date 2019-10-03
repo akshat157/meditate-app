@@ -8,6 +8,9 @@
   height: 100%;
   z-index: -10;
   position: fixed;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
 
 .bg-overlay {
