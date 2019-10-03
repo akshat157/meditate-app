@@ -158,7 +158,7 @@ class App extends Component {
           <img className="playPause" src={this.state.pbuttonUrl} alt="Play" onClick={ (e) => {this.playPause()} }/>
 
           <div className="volume-control">
-            <img onClick={this.toggleMute.bind(this)} className="volume-icon" src={this.state.volumeIcon}/>
+            <img onClick={this.toggleMute.bind(this)} className="volume-icon" src={this.state.volumeIcon} alt=""/>
             &nbsp;
             <div className="volume-slider">
               <input onChange={this.volumeChange} className="volume" type={"range"} step={1} min={0} value={this.state.mute ? 0 : this.state.volume} max={100}></input>
