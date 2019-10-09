@@ -1,5 +1,7 @@
 A meditation app created on ReactJS and bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+![Screenshot from 2019-10-09 20-03-12](https://user-images.githubusercontent.com/34815179/66491471-629c0500-ead0-11e9-9229-7e2161519a28.png)
+
 ## How to run?
 Clone the repository
 `git clone https://github.com/akshat157/meditate-app`<br>
