@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 // import logo from './logo.svg';
-import StyledProgressbar from './StyledProgressbar'
-import Sound from 'react-sound'
-import SoundComponent from './playSound'
-import 'react-circular-progressbar/dist/styles.css'
-import './App.css'
+import StyledProgressbar from './StyledProgressbar';
+import Sound from 'react-sound';
+import SoundComponent from './playSound';
+import 'react-circular-progressbar/dist/styles.css';
+import './App.css';
+import { quotes } from './quoteList';
 
 const playButton = 'svg/play.svg'
 const pauseButton = 'svg/pause.svg'
@@ -25,6 +26,8 @@ const parkImg = 'img/park.jpg'
 const streamImg = 'img/stream.jpg'
 const wavesImg = 'img/waves.jpg'
 
+const QUOTE_CHANGE_INTERVAL_TIME = 15000;
+
 class App extends Component {
   constructor(props) {
     super(props)
@@ -37,6 +40,8 @@ class App extends Component {
       audioUrl            : rainAudio,      // Default
       bgImg               : rainImg,
       desiredTime         : 120,            // Default
+      quote               : quotes[0],
+      quoteInterval       : () => this.changeQuote(),
       timeHovered         : false,
       audioHovered        : false,
       volume              : 100,            // Default
@@ -44,6 +49,10 @@ class App extends Component {
       volumeIcon          : loudVolumeIcon,
 
     }
+  }
+
+  componentDidMount() {
+    this.interval = setInterval(this.state.quoteInterval, QUOTE_CHANGE_INTERVAL_TIME);
   }
 
   timeSelect(x) {
@@ -109,6 +118,21 @@ class App extends Component {
     }
   }
 
+  changeQuote(){
+    const QUOTE_CHARACTER_LIMIT = window.visualViewport.width < 768 ? 90 : 150;
+
+    //Reset interval
+    clearInterval(this.interval);
+    this.interval = setInterval(this.state.quoteInterval, QUOTE_CHANGE_INTERVAL_TIME);
+
+    let newQuote = quotes[Math.floor(Math.random() * quotes.length-1)] || quotes[0];
+    if(newQuote.quote.length > QUOTE_CHARACTER_LIMIT)
+      this.changeQuote();
+    else
+      this.setState({
+        quote: newQuote
+      });
+
   handleTimeHover(){
     this.setState({
       timeHovered: !this.state.timeHovered
@@ -125,7 +149,7 @@ class App extends Component {
     let newVolume = event.target.value;
     this.setState({
       volume: this.state.mute ? this.state.volume : newVolume,
-      volumeIcon: this.state.mute || newVolume === 0 ? noVolumeIcon : newVolume <= 50 ? quietVolumeIcon : loudVolumeIcon
+      volumeIcon: this.state.mute || newVolume === 0 ? noVolumeIcon : newVolume <= 50 ? quietVolumeIcon : loudVolumeIcon,
     });
   }
 
@@ -152,8 +176,17 @@ class App extends Component {
     return (
       <div className="App">
         <div className="bg-overlay"></div>
-        <div className="bg" style={{ backgroundImage: `url(${this.state.bgImg})` }} />
-        <div className="time-menu">{timeOptions}</div>
+        <div className="bg" style={{ backgroundImage: `url(${this.state.bgImg})` }} ></div>
+
+        <div onClick={this.changeQuote.bind(this)} className="quote">
+          <span className="quote-text">“&nbsp;{this.state.quote.quote} ”</span>
+          <br/>
+          <span className="quote-author">-&nbsp;{this.state.quote.author}</span>
+        </div>
+        <div className="time-menu">
+          {timeOptions}
+        </div>
+
         <div className="player-container">
           <img className="playPause" src={this.state.pbuttonUrl} alt="Play" onClick={ (e) => {this.playPause()} }/>
 
