@@ -25,6 +25,8 @@ const parkImg = 'img/park.jpg'
 const streamImg = 'img/stream.jpg'
 const wavesImg = 'img/waves.jpg'
 
+const timerID = document.getElementById('timerId');
+
 class App extends Component {
   constructor(props) {
     super(props)
@@ -64,7 +66,17 @@ class App extends Component {
         pbuttonUrl: playButton,
         audioStatus: Sound.status.PAUSED,
       })
+
     }
+  }
+
+  stop() {
+    this.setState({
+      pbuttonURL: playButton,
+      audioStatus: Sound.status.STOPPED,
+      seekCurrentPosition: 0
+    })
+
   }
 
   audioSelect(name) {
@@ -120,7 +132,7 @@ class App extends Component {
       audioHovered: !this.state.audioHovered
     });
   }
-  
+
   volumeChange = (event) => {
     let newVolume = event.target.value;
     this.setState({
@@ -140,12 +152,12 @@ class App extends Component {
 
     console.log(this.state.timeBtnClass);
     const timeOptions = this.state.timeValues.map((duration) =>
-      <button key={duration} onMouseEnter={this.handleTimeHover.bind(this)} onMouseLeave={this.handleTimeHover.bind(this)} className={ !this.state.timeHovered && duration === this.state.desiredTime 
+      <button key={duration} onMouseEnter={this.handleTimeHover.bind(this)} onMouseLeave={this.handleTimeHover.bind(this)} className={ !this.state.timeHovered && duration === this.state.desiredTime
                                           ? "active" : "" } onClick={ () => {this.timeSelect({duration})} }>{duration/60} Minutes</button>
     );
 
     const audioOptions = this.state.audioNames.map((audioName) =>
-      <button key={audioName} onMouseEnter={this.handleAudioHover.bind(this)} onMouseLeave={this.handleAudioHover.bind(this)} className={ !this.state.audioHovered && this.state.audioUrl === "audio/" + audioName.toLowerCase() + ".mp3" 
+      <button key={audioName} onMouseEnter={this.handleAudioHover.bind(this)} onMouseLeave={this.handleAudioHover.bind(this)} className={ !this.state.audioHovered && this.state.audioUrl === "audio/" + audioName.toLowerCase() + ".mp3"
                                           ? "active" : "" } onClick={ () => {this.audioSelect({audioName})} }>{audioName}</button>
     );
 
@@ -156,6 +168,7 @@ class App extends Component {
         <div className="time-menu">{timeOptions}</div>
         <div className="player-container">
           <img className="playPause" src={this.state.pbuttonUrl} alt="Play" onClick={ (e) => {this.playPause()} }/>
+          <img className="stop" alt="Stop" onClick={ (e) => {this.stop()} }/>
 
           <div className="volume-control">
             <img onClick={this.toggleMute.bind(this)} className="volume-icon" src={this.state.volumeIcon} alt=""/>
@@ -170,7 +183,7 @@ class App extends Component {
           </div>
 
           <SoundComponent playStatus={this.state.audioStatus} url={this.state.audioUrl} funcPerc={this.moveSeek.bind(this)} desiredT={this.state.desiredTime} volume={this.state.mute ? 0 : this.state.volume} />
-          <div className="timer">00 : 00</div>
+          <div id="timerId"className="timer">00 : 00</div>
         </div>
 
         <div className="audio-menu">
