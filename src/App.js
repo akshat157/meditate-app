@@ -8,6 +8,7 @@ import './App.css'
 
 const playButton = 'svg/play.svg'
 const pauseButton = 'svg/pause.svg'
+const stopButton = 'svg/stop.svg'
 
 const rainAudio = 'audio/rain.mp3'
 const forestAudio = 'audio/forest.mp3'
@@ -179,7 +180,7 @@ class App extends Component {
         <div className="time-menu">{timeOptions}</div>
         <div className="player-container">
           <img className="playPause" src={this.state.pbuttonUrl} alt="Play" onClick={ (e) => {this.playPause()} }/>
-          <img className="stop" src="#" alt="Stop" onClick={ () => this.stop() }/>
+          <img className="stop" src={stopButton} alt="Stop" onClick={ () => this.stop() }/>
 
           <div className="volume-control">
             <img onClick={this.toggleMute.bind(this)} className="volume-icon" src={this.state.volumeIcon} alt=""/>
@@ -200,7 +201,7 @@ class App extends Component {
           desiredT={this.state.desiredTime} 
           volume={this.state.mute ? 0 : this.state.volume}
            />
-          <div id="timerId"className="timer">00 : 00</div>
+          <div className="timer">00 : 00</div>
         </div>
 
         <div className="audio-menu">
