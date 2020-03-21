@@ -56,6 +56,7 @@ class App extends Component {
 
   playPause() {
     console.log('plaPayse')
+    
     if (this.state.pbuttonUrl === playButton) {
       this.setState({
         pbuttonUrl: pauseButton,
@@ -71,12 +72,22 @@ class App extends Component {
   }
 
   stop() {
-    this.setState({
-      pbuttonURL: playButton,
-      audioStatus: Sound.status.STOPPED,
-      seekCurrentPosition: 0
-    })
+    if (this.state.pbuttonUrl === playButton) {
+      this.setState({
+        // pbuttonUrl: pauseButton,
+        audioStatus: Sound.status.STOPPED,
+        seekCurrentPosition : 0,
 
+      })
+    } else if (this.state.pbuttonUrl === pauseButton) {
+      this.setState({
+        pbuttonUrl: playButton,
+        audioStatus: Sound.status.STOPPED,
+        seekCurrentPosition : 0,
+      })
+
+    }
+    
   }
 
   audioSelect(name) {
@@ -168,7 +179,7 @@ class App extends Component {
         <div className="time-menu">{timeOptions}</div>
         <div className="player-container">
           <img className="playPause" src={this.state.pbuttonUrl} alt="Play" onClick={ (e) => {this.playPause()} }/>
-          <img className="stop" alt="Stop" onClick={ (e) => {this.stop()} }/>
+          <img className="stop" src="#" alt="Stop" onClick={ () => this.stop() }/>
 
           <div className="volume-control">
             <img onClick={this.toggleMute.bind(this)} className="volume-icon" src={this.state.volumeIcon} alt=""/>
@@ -182,7 +193,13 @@ class App extends Component {
             <StyledProgressbar id='seek' percentage={this.state.seekCurrentPosition} />
           </div>
 
-          <SoundComponent playStatus={this.state.audioStatus} url={this.state.audioUrl} funcPerc={this.moveSeek.bind(this)} desiredT={this.state.desiredTime} volume={this.state.mute ? 0 : this.state.volume} />
+          <SoundComponent 
+          playStatus={this.state.audioStatus} 
+          url={this.state.audioUrl} 
+          funcPerc={this.moveSeek.bind(this)} 
+          desiredT={this.state.desiredTime} 
+          volume={this.state.mute ? 0 : this.state.volume}
+           />
           <div id="timerId"className="timer">00 : 00</div>
         </div>
 
