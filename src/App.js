@@ -8,6 +8,7 @@ import './App.css'
 
 const playButton = 'svg/play.svg'
 const pauseButton = 'svg/pause.svg'
+const stopButton = 'svg/stop.svg'
 
 const rainAudio = 'audio/rain.mp3'
 const forestAudio = 'audio/forest.mp3'
@@ -24,6 +25,8 @@ const forestImg = 'img/forest.jpg'
 const parkImg = 'img/park.jpg'
 const streamImg = 'img/stream.jpg'
 const wavesImg = 'img/waves.jpg'
+
+const timerID = document.getElementById('timerId');
 
 class App extends Component {
   constructor(props) {
@@ -54,6 +57,7 @@ class App extends Component {
 
   playPause() {
     console.log('plaPayse')
+    
     if (this.state.pbuttonUrl === playButton) {
       this.setState({
         pbuttonUrl: pauseButton,
@@ -64,7 +68,27 @@ class App extends Component {
         pbuttonUrl: playButton,
         audioStatus: Sound.status.PAUSED,
       })
+
     }
+  }
+
+  stop() {
+    if (this.state.pbuttonUrl === playButton) {
+      this.setState({
+        // pbuttonUrl: pauseButton,
+        audioStatus: Sound.status.STOPPED,
+        seekCurrentPosition : 0,
+
+      })
+    } else if (this.state.pbuttonUrl === pauseButton) {
+      this.setState({
+        pbuttonUrl: playButton,
+        audioStatus: Sound.status.STOPPED,
+        seekCurrentPosition : 0,
+      })
+
+    }
+    
   }
 
   audioSelect(name) {
@@ -120,7 +144,7 @@ class App extends Component {
       audioHovered: !this.state.audioHovered
     });
   }
-  
+
   volumeChange = (event) => {
     let newVolume = event.target.value;
     this.setState({
@@ -140,12 +164,12 @@ class App extends Component {
 
     console.log(this.state.timeBtnClass);
     const timeOptions = this.state.timeValues.map((duration) =>
-      <button key={duration} onMouseEnter={this.handleTimeHover.bind(this)} onMouseLeave={this.handleTimeHover.bind(this)} className={ !this.state.timeHovered && duration === this.state.desiredTime 
+      <button key={duration} onMouseEnter={this.handleTimeHover.bind(this)} onMouseLeave={this.handleTimeHover.bind(this)} className={ !this.state.timeHovered && duration === this.state.desiredTime
                                           ? "active" : "" } onClick={ () => {this.timeSelect({duration})} }>{duration/60} Minutes</button>
     );
 
     const audioOptions = this.state.audioNames.map((audioName) =>
-      <button key={audioName} onMouseEnter={this.handleAudioHover.bind(this)} onMouseLeave={this.handleAudioHover.bind(this)} className={ !this.state.audioHovered && this.state.audioUrl === "audio/" + audioName.toLowerCase() + ".mp3" 
+      <button key={audioName} onMouseEnter={this.handleAudioHover.bind(this)} onMouseLeave={this.handleAudioHover.bind(this)} className={ !this.state.audioHovered && this.state.audioUrl === "audio/" + audioName.toLowerCase() + ".mp3"
                                           ? "active" : "" } onClick={ () => {this.audioSelect({audioName})} }>{audioName}</button>
     );
 
@@ -156,6 +180,7 @@ class App extends Component {
         <div className="time-menu">{timeOptions}</div>
         <div className="player-container">
           <img className="playPause" src={this.state.pbuttonUrl} alt="Play" onClick={ (e) => {this.playPause()} }/>
+          <img className="stop" src={stopButton} alt="Stop" onClick={ () => this.stop() }/>
 
           <div className="volume-control">
             <img onClick={this.toggleMute.bind(this)} className="volume-icon" src={this.state.volumeIcon} alt=""/>
@@ -169,7 +194,13 @@ class App extends Component {
             <StyledProgressbar id='seek' percentage={this.state.seekCurrentPosition} />
           </div>
 
-          <SoundComponent playStatus={this.state.audioStatus} url={this.state.audioUrl} funcPerc={this.moveSeek.bind(this)} desiredT={this.state.desiredTime} volume={this.state.mute ? 0 : this.state.volume} />
+          <SoundComponent 
+          playStatus={this.state.audioStatus} 
+          url={this.state.audioUrl} 
+          funcPerc={this.moveSeek.bind(this)} 
+          desiredT={this.state.desiredTime} 
+          volume={this.state.mute ? 0 : this.state.volume}
+           />
           <div className="timer">00 : 00</div>
         </div>
 

@@ -110,7 +110,17 @@ button .active {
 }
 
 .playPause {
+  position: relative;
+  top: 135px;
+  left: -25px;
   width: 40px;
+  z-index: 10;
+}
+.stop {
+  position: relative;
+  top: -135px;
+  left: 30px;
+  width: 70px;
   z-index: 10;
 }
 
