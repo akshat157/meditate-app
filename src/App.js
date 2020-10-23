@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
 // import logo from './logo.svg';
+
 import StyledProgressbar from './StyledProgressbar'
 import Sound from 'react-sound'
 import SoundComponent from './playSound'
 import 'react-circular-progressbar/dist/styles.css'
 import './App.css'
+
+const ESCAPE_KEY = 27
 
 const playButton = 'svg/play.svg'
 const pauseButton = 'svg/pause.svg'
@@ -15,9 +18,9 @@ const parkAudio = 'audio/park.mp3'
 const streamAudio = 'audio/stream.mp3'
 const wavesAudio = 'audio/waves.mp3'
 
-const loudVolumeIcon = "svg/volume-2.svg";
-const quietVolumeIcon = "svg/volume-1.svg";
-const noVolumeIcon = "svg/volume-x.svg";
+const loudVolumeIcon = "svg/volume-2.svg"
+const quietVolumeIcon = "svg/volume-1.svg"
+const noVolumeIcon = "svg/volume-x.svg"
 
 const rainImg = 'img/rain.jpg'
 const forestImg = 'img/forest.jpg'
@@ -36,13 +39,13 @@ class App extends Component {
       seekCurrentPosition : 0,
       audioUrl            : rainAudio,      // Default
       bgImg               : rainImg,
-      desiredTime         : 120,            // Default
+      desiredTime         : 120,        // Default
+      immersiveMode       : false       // Default
       timeHovered         : false,
       audioHovered        : false,
       volume              : 100,            // Default
       mute                : false,          // Default
       volumeIcon          : loudVolumeIcon,
-
     }
   }
 
@@ -109,6 +112,22 @@ class App extends Component {
     }
   }
 
+  toggleImmersive(){
+    this.setState({immersiveMode : !this.state.immersiveMode});
+  }
+
+  _handleKeyDown = (event) => {
+    switch( event.keyCode ) {
+      case ESCAPE_KEY:
+        this.toggleImmersive();
+        break;
+      default:
+        break;
+    }
+  }
+
+componentDidMount(){
+    document.addEventListener("keydown", this._handleKeyDown);
   handleTimeHover(){
     this.setState({
       timeHovered: !this.state.timeHovered
@@ -152,9 +171,13 @@ class App extends Component {
     return (
       <div className="App">
         <div className="bg-overlay"></div>
-        <div className="bg" style={{ backgroundImage: `url(${this.state.bgImg})` }} />
-        <div className="time-menu">{timeOptions}</div>
-        <div className="player-container">
+        <div className="bg">
+          <img src={this.state.bgImg} alt=""/>
+        </div>
+        <div className={"time-menu " + (this.state.immersiveMode ? "immersive" : "")}>
+          {timeOptions}
+        </div>
+        <div className={"player-container " + (this.state.immersiveMode ? "immersive" : "")}>
           <img className="playPause" src={this.state.pbuttonUrl} alt="Play" onClick={ (e) => {this.playPause()} }/>
 
           <div className="volume-control">
@@ -171,9 +194,8 @@ class App extends Component {
 
           <SoundComponent playStatus={this.state.audioStatus} url={this.state.audioUrl} funcPerc={this.moveSeek.bind(this)} desiredT={this.state.desiredTime} volume={this.state.mute ? 0 : this.state.volume} />
           <div className="timer">00 : 00</div>
-        </div>
-
-        <div className="audio-menu">
+        </div>        
+        <div className={"audio-menu " + (this.state.immersiveMode ? "immersive" : "")}>
           {audioOptions}
         </div>
       </div>
