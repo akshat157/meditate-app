@@ -119,13 +119,19 @@ button .active {
 }
 
 .volume-control {
+  width: 50%;
   display: flex;
+  align-items: center;
   position: absolute;
   bottom: 0%;
 
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 32px;
   color: white;
+}
+
+.volume-slider {
+  width: 100%;
 }
 
 .volume-icon {

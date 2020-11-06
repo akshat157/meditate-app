@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import StyledProgressbar from './StyledProgressbar'
 import Sound from 'react-sound'
 import SoundComponent from './playSound'
+import StyledSlider from './StyledSlider';
 import 'react-circular-progressbar/dist/styles.css'
 import './App.css'
 
@@ -109,23 +110,22 @@ class App extends Component {
     }
   }
 
-  handleTimeHover(){
+  handleTimeHover() {
     this.setState({
       timeHovered: !this.state.timeHovered
     });
   }
 
-  handleAudioHover(){
+  handleAudioHover() {
     this.setState({
       audioHovered: !this.state.audioHovered
     });
   }
-  
-  volumeChange = (event) => {
-    let newVolume = event.target.value;
+
+  volumeChange = (value) => {
     this.setState({
-      volume: this.state.mute ? this.state.volume : newVolume,
-      volumeIcon: this.state.mute || newVolume === 0 ? noVolumeIcon : newVolume <= 50 ? quietVolumeIcon : loudVolumeIcon
+      volume: this.state.mute ? this.state.volume : value,
+      volumeIcon: this.state.mute || value === 0 ? noVolumeIcon : value <= 50 ? quietVolumeIcon : loudVolumeIcon
     });
   }
 
@@ -155,13 +155,13 @@ class App extends Component {
         <div className="bg" style={{ backgroundImage: `url(${this.state.bgImg})` }} />
         <div className="time-menu">{timeOptions}</div>
         <div className="player-container">
-          <img className="playPause" src={this.state.pbuttonUrl} alt="Play" onClick={ (e) => {this.playPause()} }/>
+          <img className="playPause" src={this.state.pbuttonUrl} alt="Play" onClick={(e) => { this.playPause() }} />
 
           <div className="volume-control">
-            <img onClick={this.toggleMute.bind(this)} className="volume-icon" src={this.state.volumeIcon} alt=""/>
+            <img onClick={this.toggleMute.bind(this)} className="volume-icon" src={this.state.volumeIcon} alt="" />
             &nbsp;
             <div className="volume-slider">
-              <input onChange={this.volumeChange} className="volume" type={"range"} step={1} min={0} value={this.state.mute ? 0 : this.state.volume} max={100}></input>
+              <StyledSlider id='slider'  onChange={this.volumeChange} step={1} min={0} max={100} value={this.state.mute ? 0 : this.state.volume} />
             </div>
           </div>
 
