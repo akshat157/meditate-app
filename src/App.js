@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-// import logo from './logo.svg';
 import StyledProgressbar from './StyledProgressbar'
+
 import Sound from 'react-sound'
 import SoundComponent from './playSound'
 import StyledSlider from './StyledSlider';
@@ -10,21 +10,23 @@ import './App.css'
 const playButton = 'svg/play.svg'
 const pauseButton = 'svg/pause.svg'
 
-const rainAudio = 'audio/rain.mp3'
-const forestAudio = 'audio/forest.mp3'
-const parkAudio = 'audio/park.mp3'
+const crystalBowlsAudio = 'audio/crystal-singing-bowl.mp3'
+const birdsAudio = 'audio/birdies.mp3'
+const thunderAudio = 'audio/thunder-storm.mp3'
 const streamAudio = 'audio/stream.mp3'
 const wavesAudio = 'audio/waves.mp3'
+const trafficAudio = 'audio/traffic.mp3'
 
 const loudVolumeIcon = "svg/volume-2.svg";
 const quietVolumeIcon = "svg/volume-1.svg";
 const noVolumeIcon = "svg/volume-x.svg";
 
-const rainImg = 'img/rain.jpg'
-const forestImg = 'img/forest.jpg'
-const parkImg = 'img/park.jpg'
-const streamImg = 'img/stream.jpg'
-const wavesImg = 'img/waves.jpg'
+const crystalImg = 'img/pale-red.jpg'
+const birdsImg = 'img/pale-red.jpg'
+const thunderImg = 'img/pale-red.jpg'
+const streamImg = 'img/pale-red.jpg'
+const wavesImg = 'img/pale-red.jpg'
+const trafficImg = 'img/pale-red.jpg'
 
 class App extends Component {
   constructor(props) {
@@ -32,15 +34,15 @@ class App extends Component {
     this.state = {
       pbuttonUrl          : playButton,
       audioStatus         : Sound.status.STOPPED,
-      timeValues          : [120, 300, 600, 900],
-      audioNames          : ["Rain", "Forest", "Park", "Stream", "Waves"],
+      timeValues          : [1200, 3000, 6000, 9000],
+      audioNames          : ["Crystal Bowl", "Birds", "Thunderstorm", "Stream", "Waves", "Traffic"],
       seekCurrentPosition : 0,
-      audioUrl            : rainAudio,      // Default
-      bgImg               : rainImg,
+      audioUrl            : crystalBowlsAudio,      // Default
+      bgImg               : crystalImg,
       desiredTime         : 120,            // Default
       timeHovered         : false,
       audioHovered        : false,
-      volume              : 100,            // Default
+      volume              : 50,            // Default
       mute                : false,          // Default
       volumeIcon          : loudVolumeIcon,
 
@@ -73,13 +75,13 @@ class App extends Component {
 
     if (x === this.state.audioNames[1]) {
       this.setState({
-        audioUrl: forestAudio,
-        bgImg: forestImg,
+        audioUrl: birdsAudio,
+        bgImg: birdsImg,
       })
     } else if (x === this.state.audioNames[2]) {
       this.setState({
-        audioUrl: parkAudio,
-        bgImg: parkImg,
+        audioUrl: thunderAudio,
+        bgImg: thunderImg,
       })
     } else if (x === this.state.audioNames[3]) {
       this.setState({
@@ -91,10 +93,15 @@ class App extends Component {
         audioUrl: wavesAudio,
         bgImg: wavesImg,
       })
+    } else if (x === this.state.audioNames[5])  {
+      this.setState({
+        audioUrl: trafficAudio,
+        bgImg: trafficImg,
+      })
     } else {
       this.setState({
-        audioUrl: rainAudio,
-        bgImg: rainImg,
+        audioUrl: crystalBowlsAudio,
+        bgImg: crystalImg,
       })
     }
   }
@@ -166,7 +173,7 @@ class App extends Component {
           </div>
 
           <div className="audioSeek">
-            <StyledProgressbar id='seek' percentage={this.state.seekCurrentPosition} />
+            <StyledProgressbar id='seek' percentage={this.state.seekCurrentPosition}  />
           </div>
 
           <SoundComponent playStatus={this.state.audioStatus} url={this.state.audioUrl} funcPerc={this.moveSeek.bind(this)} desiredT={this.state.desiredTime} volume={this.state.mute ? 0 : this.state.volume} />
