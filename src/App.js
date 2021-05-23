@@ -177,31 +177,27 @@ class App extends Component {
       this.timer = setInterval(() => {
         this.setState({seconds: this.state.seconds + 1})
         
-        let image
-        try{
 
-          const image = webcam.snap();
-        } catch (e) {
-          console.log("oops")
-        }
+        //  const image = webcam.snap();
 
-        console.log(image)
+
+        //console.log(image)
         const url = "https://localhost:5000/dilation"
         
-        fetch(url, {
-            method: 'POST',
-            mode: 'cors',
-            headers: {
-              'Content-Type': 'image/jpeg',
-              'Access-Control-Allow-Origin': "*",
-            },
-            body: {
-              image: JSON.stringify(image)
-            }
-          }
-        )
-        .then(response => response.json())
-        .then(data => console.log(data));
+        // fetch(url, {
+        //     method: 'POST',
+        //     mode: 'cors',
+        //     headers: {
+        //       'Content-Type': 'image/jpeg',
+        //       'Access-Control-Allow-Origin': "*",
+        //     },
+        //     body: {
+        //       image: JSON.stringify(image)
+        //     }
+        //   }
+        // )
+        // .then(response => response.json())
+        // .then(data => console.log(data));
 
 
       }, 1000);
