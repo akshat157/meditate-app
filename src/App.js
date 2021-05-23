@@ -6,6 +6,8 @@ import SoundComponent from './playSound'
 import StyledSlider from './StyledSlider';
 import 'react-circular-progressbar/dist/styles.css'
 import './App.css'
+//import Webcam from 'react-webcam'
+import Webcam from 'webcam-easy';
 
 const playButton = 'svg/play.svg'
 const pauseButton = 'svg/pause.svg'
@@ -28,6 +30,7 @@ const streamImg = 'img/pale-red.jpg'
 const wavesImg = 'img/pale-red.jpg'
 const trafficImg = 'img/pale-red.jpg'
 
+
 class App extends Component {
   constructor(props) {
     super(props)
@@ -37,7 +40,7 @@ class App extends Component {
       timeValues          : [1200, 3000, 6000, 9000],
       audioNames          : ["Crystal Bowl", "Birds", "Thunderstorm", "Stream", "Waves", "Traffic"],
       seekCurrentPosition : 0,
-      audioUrl            : crystalBowlsAudio,      // Default
+      audioUrl            : wavesAudio,      // Default
       bgImg               : crystalImg,
       desiredTime         : 120,            // Default
       timeHovered         : false,
@@ -45,8 +48,16 @@ class App extends Component {
       volume              : 50,            // Default
       mute                : false,          // Default
       volumeIcon          : loudVolumeIcon,
+      currentTime         : 0,
+      seconds             : 0 
+
 
     }
+
+    this.timer = 0;
+    this.startTimer = this.startTimer.bind(this);
+
+
   }
 
   timeSelect(x) {
@@ -57,6 +68,12 @@ class App extends Component {
 
   playPause() {
     console.log('plaPayse')
+    console.log("seconds: " + this.state.seconds)
+    if(this.state.seconds === 0){
+      console.log("Starting Timer")
+      this.startTimer()
+    }
+
     if (this.state.pbuttonUrl === playButton) {
       this.setState({
         pbuttonUrl: pauseButton,
@@ -143,9 +160,67 @@ class App extends Component {
     });
   }
 
+  startTimer() {
+    const webcamElement = document.getElementById('webcam');
+    const canvasElement = document.getElementById('canvas');
+    const snapSoundElement = document.getElementById('snapSound');
+    const webcam = new Webcam(webcamElement, 'user', canvasElement, snapSoundElement);
+    webcam.start()
+    .then(result =>{
+      console.log("webcam started");
+    })
+    .catch(err => {
+      console.log(err);
+    });
+
+    if (this.timer === 0) {
+      this.timer = setInterval(() => {
+        this.setState({seconds: this.state.seconds + 1})
+        
+        let image
+        try{
+
+          const image = webcam.snap();
+        } catch (e) {
+          console.log("oops")
+        }
+
+        console.log(image)
+        const url = "https://localhost:5000/dilation"
+        
+        fetch(url, {
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+              'Content-Type': 'image/jpeg',
+              'Access-Control-Allow-Origin': "*",
+            },
+            body: {
+              image: JSON.stringify(image)
+            }
+          }
+        )
+        .then(response => response.json())
+        .then(data => console.log(data));
+
+
+      }, 1000);
+    }
+  }
+
+  // WebcamCapture() {
+    
+
+  //   const capture = React.useCallback(
+  //     () => {
+  //       const imageSrc = ;
+  //     },
+  //     [webcamRef]
+  //   );
+  // }
+
   render() {
 
-    console.log(this.state.timeBtnClass);
     const timeOptions = this.state.timeValues.map((duration) =>
       <button key={duration} onMouseEnter={this.handleTimeHover.bind(this)} onMouseLeave={this.handleTimeHover.bind(this)} className={ !this.state.timeHovered && duration === this.state.desiredTime 
                                           ? "active" : "" } onClick={ () => {this.timeSelect({duration})} }>{duration/60} Minutes</button>
@@ -156,14 +231,38 @@ class App extends Component {
                                           ? "active" : "" } onClick={ () => {this.audioSelect({audioName})} }>{audioName}</button>
     );
 
+    let text;
+    if(this.state.seconds === 19){
+      this.state.seconds = 0
+      text = (<div className="breathe"><p>Breathe In</p></div>)
+    }
+
+    if(this.state.seconds < 19){
+      text = (<div className="breathe"><p>Breathe Out</p></div>)
+    }
+
+    if(this.state.seconds < 11){
+      text = (<div className="breathe"><p>Hold</p></div>)
+    }
+
+    if(this.state.seconds < 4){
+      text = (<div className="breathe"><p>Breathe In</p></div>)
+    }
+
     return (
       <div className="App">
         <div className="bg-overlay"></div>
         <div className="bg" style={{ backgroundImage: `url(${this.state.bgImg})` }} />
         <div className="time-menu">{timeOptions}</div>
         <div className="player-container">
+          
+          <video id="webcam" autoplay playsinline width="640" height="480"></video>
+          <canvas id="canvas" class="d-none"></canvas>
+          <audio id="snapSound" src="audio/snap.wav" preload = "auto"></audio>
+          {text}
+          
           <img className="playPause" src={this.state.pbuttonUrl} alt="Play" onClick={(e) => { this.playPause() }} />
-
+          
           <div className="volume-control">
             <img onClick={this.toggleMute.bind(this)} className="volume-icon" src={this.state.volumeIcon} alt="" />
             &nbsp;
@@ -172,12 +271,10 @@ class App extends Component {
             </div>
           </div>
 
-          <div className="audioSeek">
-            <StyledProgressbar id='seek' percentage={this.state.seekCurrentPosition}  />
-          </div>
-
           <SoundComponent playStatus={this.state.audioStatus} url={this.state.audioUrl} funcPerc={this.moveSeek.bind(this)} desiredT={this.state.desiredTime} volume={this.state.mute ? 0 : this.state.volume} />
-          <div className="timer">00 : 00</div>
+          
+          
+
         </div>
 
         <div className="audio-menu">
