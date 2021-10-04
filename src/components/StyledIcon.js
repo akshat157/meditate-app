@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-function StyledIcon({ className, url, alt = "", handleOnClick }) {
+function StyledIcon({ className, url, alt = '', handleOnClick }) {
   return (
     <img
       className={className}

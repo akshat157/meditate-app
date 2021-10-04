@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 
 function BackgroundImage({ currentImage }) {
   return (
-    <div className='bg' style={{ backgroundImage: `url(${currentImage})` }} />
+    <div className="bg" style={{ backgroundImage: `url(${currentImage})` }} />
   );
 }
 
