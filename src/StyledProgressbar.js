@@ -34,7 +34,7 @@ function StyledProgressbar(props) {
           // Tweak text color:
           fill: '#f88',
           // Tweak text size:
-          fontSize: '30px',
+          fontSize: '12px',
         },
       }}
     />
