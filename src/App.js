@@ -222,6 +222,7 @@ class App extends Component {
           />
           <div className='timer'>00 : 00</div>
         </div>
+        <div className='audio-menu'>{audioOptions}</div>
       </div>
     )
   }
