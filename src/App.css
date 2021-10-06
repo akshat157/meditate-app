@@ -85,9 +85,6 @@ button .active {
   flex-direction: column;
 }
 
-.time-menu {
-}
-
 .player-container {
   position: relative;
 }
@@ -100,9 +97,6 @@ button .active {
 .player-container .timer {
   position: absolute;
   bottom: 10%;
-}
-
-.audio-menu {
 }
 
 .playPause {

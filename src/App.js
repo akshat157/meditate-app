@@ -3,7 +3,6 @@ import Sound from "react-sound";
 import "react-circular-progressbar/dist/styles.css";
 import "./App.css";
 
-// import logo from './logo.svg';
 import SoundComponent from "./playSound";
 import {
   StyledProgressBar,
