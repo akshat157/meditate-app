@@ -25,7 +25,6 @@ class SoundComponent extends Component {
     timer.innerHTML = `${min} : ${sec}`
     this.props.funcPerc(pos / 1000)
 
-    console.log(Math.floor(pos / 1000) + ', ' + this.props.desiredT)
   }
 
   render() {

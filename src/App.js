@@ -4,7 +4,7 @@ import 'react-circular-progressbar/dist/styles.css'
 import './App.css'
 
 // import logo from './logo.svg';
-import SoundComponent from './playSound'
+import SoundComponent from './playSound';
 import {
   StyledProgressBar,
   StyledSlider,
@@ -35,19 +35,19 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      pbuttonUrl: playButton,
-      audioStatus: Sound.status.STOPPED,
-      timeValues: [120, 300, 600, 900],
-      audioNames: ['Rain', 'Forest', 'Park', 'Stream', 'Waves'],
-      seekCurrentPosition: 0,
-      audioUrl: rainAudio, // Default
-      bgImg: rainImg,
-      desiredTime: 120, // Default
-      timeHovered: false,
-      audioHovered: false,
-      volume: 100, // Default
-      mute: false, // Default
-      volumeIcon: loudVolumeIcon,
+      pbuttonUrl          : playButton,
+      audioStatus         : Sound.status.STOPPED,
+      timeValues          : [120, 300, 600, 900],
+      audioNames          : ["Rain", "Forest", "Park", "Stream", "Waves"],
+      seekCurrentPosition : 0,
+      audioUrl            : rainAudio, // Default
+      bgImg               : rainImg,
+      desiredTime         : 120, // Default
+      timeHovered         : false,
+      audioHovered        : false,
+      volume              : 100, // Default
+      mute                : false, // Default
+      volumeIcon          : loudVolumeIcon,
     }
   }
 
@@ -58,7 +58,6 @@ class App extends Component {
   }
 
   playPause() {
-    console.log('plaPayse')
     if (this.state.pbuttonUrl === playButton) {
       this.setState({
         pbuttonUrl: pauseButton,
@@ -152,7 +151,7 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state.timeBtnClass)
+    console.log(this.state.timeBtnClass);
     const timeOptions = this.state.timeValues.map((duration) => (
       <StyledButton
         key={duration}
