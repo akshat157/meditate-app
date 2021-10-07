@@ -30,8 +30,7 @@ export function register(config) {
       // serve assets; see https://github.com/facebook/create-react-app/issues/2374
       return
     }
-    const publicUrl = new URL(process.env.PUBLIC_URL, window.location.href);
-    
+
     window.addEventListener('load', () => {
       const swUrl = `${process.env.PUBLIC_URL}/service-worker.js`
 
@@ -123,7 +122,6 @@ function checkValidServiceWorker(swUrl, config) {
         'No internet connection found. App is running in offline mode.'
       )
     })
-    });
 }
 
 export function unregister() {

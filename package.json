@@ -14,7 +14,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "lint": "npx prettier --write src/**/*.js",
+    "lint": "npx prettier --write src/**/*.js src/**.js",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
