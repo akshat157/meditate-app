@@ -1,17 +1,17 @@
-import React, { Component } from 'react';
-import Sound from 'react-sound';
-import 'react-circular-progressbar/dist/styles.css';
-import './App.css';
+import React, { Component } from 'react'
+import Sound from 'react-sound'
+import 'react-circular-progressbar/dist/styles.css'
+import './App.css'
 
 // import logo from './logo.svg';
-import SoundComponent from './playSound';
+import SoundComponent from './playSound'
 import {
   StyledProgressBar,
   StyledSlider,
   StyledButton,
   BackgroundImage,
   StyledIcon,
-} from './components';
+} from './components'
 
 import {
   playButton,
@@ -29,11 +29,11 @@ import {
   parkImg,
   wavesImg,
   streamImg,
-} from './constants';
+} from './constants'
 
 class App extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       pbuttonUrl: playButton,
       audioStatus: Sound.status.STOPPED,
@@ -48,84 +48,84 @@ class App extends Component {
       volume: 100, // Default
       mute: false, // Default
       volumeIcon: loudVolumeIcon,
-    };
+    }
   }
 
   timeSelect(x) {
     this.setState({
       desiredTime: x.duration,
-    });
+    })
   }
 
   playPause() {
-    console.log('plaPayse');
+    console.log('plaPayse')
     if (this.state.pbuttonUrl === playButton) {
       this.setState({
         pbuttonUrl: pauseButton,
         audioStatus: Sound.status.PLAYING,
-      });
+      })
     } else if (this.state.pbuttonUrl === pauseButton) {
       this.setState({
         pbuttonUrl: playButton,
         audioStatus: Sound.status.PAUSED,
-      });
+      })
     }
   }
 
   audioSelect(name) {
-    var x = JSON.stringify(name.audioName).replace(/["]+/g, '');
+    var x = JSON.stringify(name.audioName).replace(/["]+/g, '')
 
     if (x === this.state.audioNames[1]) {
       this.setState({
         audioUrl: forestAudio,
         bgImg: forestImg,
-      });
+      })
     } else if (x === this.state.audioNames[2]) {
       this.setState({
         audioUrl: parkAudio,
         bgImg: parkImg,
-      });
+      })
     } else if (x === this.state.audioNames[3]) {
       this.setState({
         audioUrl: streamAudio,
         bgImg: streamImg,
-      });
+      })
     } else if (x === this.state.audioNames[4]) {
       this.setState({
         audioUrl: wavesAudio,
         bgImg: wavesImg,
-      });
+      })
     } else {
       this.setState({
         audioUrl: rainAudio,
         bgImg: rainImg,
-      });
+      })
     }
   }
 
   moveSeek(pos) {
     this.setState({
       seekCurrentPosition: (pos / this.state.desiredTime) * 100,
-    });
+    })
 
     if (Math.floor(pos) === this.state.desiredTime) {
       this.setState({
         pbuttonUrl: playButton,
         audioStatus: Sound.status.STOPPED,
-      });
+      })
     }
   }
 
   handleTimeHover() {
     this.setState({
       timeHovered: !this.state.timeHovered,
-    });
+    })
   }
 
   handleAudioHover() {
     this.setState({
       audioHovered: !this.state.audioHovered,
-    });
+    })
   }
 
   volumeChange = (value) => {
@@ -137,8 +137,8 @@ class App extends Component {
           : value <= 50
           ? quietVolumeIcon
           : loudVolumeIcon,
-    });
-  };
+    })
+  }
 
   toggleMute() {
     this.setState({
@@ -148,25 +148,25 @@ class App extends Component {
         ? quietVolumeIcon
         : loudVolumeIcon,
       mute: !this.state.mute,
-    });
+    })
   }
 
   render() {
-    console.log(this.state.timeBtnClass);
+    console.log(this.state.timeBtnClass)
     const timeOptions = this.state.timeValues.map((duration) => (
       <StyledButton
         key={duration}
         onMouseEnter={this.handleTimeHover.bind(this)}
         onMouseLeave={this.handleTimeHover.bind(this)}
         onClick={() => {
-          this.timeSelect({ duration });
+          this.timeSelect({ duration })
         }}
         isActive={
           !this.state.timeHovered && duration === this.state.desiredTime
         }
         buttonLabel={`${duration / 60} Minutes`}
       />
-    ));
+    ))
 
     const audioOptions = this.state.audioNames.map((audioName) => (
       <StyledButton
@@ -174,7 +174,7 @@ class App extends Component {
         onMouseEnter={this.handleAudioHover.bind(this)}
         onMouseLeave={this.handleAudioHover.bind(this)}
         onClick={() => {
-          this.audioSelect({ audioName });
+          this.audioSelect({ audioName })
         }}
         isActive={
           !this.state.audioHovered &&
@@ -182,7 +182,7 @@ class App extends Component {
         }
         buttonLabel={audioName}
       />
-    ));
+    ))
 
     return (
       <div className="App">
@@ -234,8 +234,8 @@ class App extends Component {
         </div>
         <div className="audio-menu">{audioOptions}</div>
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App

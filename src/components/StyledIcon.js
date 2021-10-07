@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 function StyledIcon({ className, url, alt = '', handleOnClick }) {
   return (
@@ -8,7 +8,7 @@ function StyledIcon({ className, url, alt = '', handleOnClick }) {
       alt={alt}
       onClick={() => handleOnClick()}
     />
-  );
+  )
 }
 
-export default StyledIcon;
+export default StyledIcon

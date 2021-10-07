@@ -1,5 +1,5 @@
-import React from 'react';
-import CircularProgressbar from 'react-circular-progressbar';
+import React from 'react'
+import CircularProgressbar from 'react-circular-progressbar'
 
 const progressBarStyle = {
   // Customize the root svg element
@@ -25,7 +25,7 @@ const progressBarStyle = {
     // Tweak text size:
     fontSize: '30px',
   },
-};
+}
 
 function StyledProgressBar({ percentage, text, strokeWidth = 3 }) {
   return (
@@ -40,6 +40,6 @@ function StyledProgressBar({ percentage, text, strokeWidth = 3 }) {
       // https://github.com/iqnivek/react-circular-progressbar/blob/master/src/styles.css
       styles={progressBarStyle}
     />
-  );
+  )
 }
-export default StyledProgressBar;
+export default StyledProgressBar

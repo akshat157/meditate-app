@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 function StyledButton({
   onMouseEnter,
@@ -16,7 +16,7 @@ function StyledButton({
     >
       {buttonLabel}
     </button>
-  );
+  )
 }
 
-export default StyledButton;
+export default StyledButton
