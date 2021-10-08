@@ -1,16 +1,17 @@
-import React, { Component } from "react";
-import Sound from "react-sound";
-import "react-circular-progressbar/dist/styles.css";
-import "./App.css";
+import React, { Component } from 'react'
+import Sound from 'react-sound'
+import 'react-circular-progressbar/dist/styles.css'
+import './App.css'
 
-import SoundComponent from "./playSound";
+// import logo from './logo.svg';
+import SoundComponent from './playSound'
 import {
   StyledProgressBar,
   StyledSlider,
   StyledButton,
   BackgroundImage,
   StyledIcon,
-} from "./components";
+} from './components'
 
 import {
   playButton,
@@ -28,26 +29,25 @@ import {
   parkImg,
   wavesImg,
   streamImg,
-} from "./constants";
+} from './constants'
 
 class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      pbuttonUrl          : playButton,
-      audioStatus         : Sound.status.STOPPED,
-      timeValues          : [120, 300, 600, 900],
-      audioNames          : ["Rain", "Forest", "Park", "Stream", "Waves"],
-      seekCurrentPosition : 0,
-      audioUrl            : rainAudio,
-      bgImg               : rainImg,
-      desiredTime         : 120,
-      timeHovered         : false,
-      audioHovered        : false,
-      volume              : 100,
-      mute                : false,
-      volumeIcon          : loudVolumeIcon,
-
+      pbuttonUrl: playButton,
+      audioStatus: Sound.status.STOPPED,
+      timeValues: [120, 300, 600, 900],
+      audioNames: ['Rain', 'Forest', 'Park', 'Stream', 'Waves'],
+      seekCurrentPosition: 0,
+      audioUrl: rainAudio, // Default
+      bgImg: rainImg,
+      desiredTime: 120, // Default
+      timeHovered: false,
+      audioHovered: false,
+      volume: 100, // Default
+      mute: false, // Default
+      volumeIcon: loudVolumeIcon,
     }
   }
 
@@ -103,7 +103,9 @@ class App extends Component {
   }
 
   moveSeek(pos) {
-    this.setState({ seekCurrentPosition: (pos / this.state.desiredTime) * 100 })
+    this.setState({
+      seekCurrentPosition: (pos / this.state.desiredTime) * 100,
+    })
 
     if (Math.floor(pos) === this.state.desiredTime) {
       this.setState({
@@ -115,45 +117,55 @@ class App extends Component {
 
   handleTimeHover() {
     this.setState({
-      timeHovered: !this.state.timeHovered
-    });
+      timeHovered: !this.state.timeHovered,
+    })
   }
 
   handleAudioHover() {
     this.setState({
-      audioHovered: !this.state.audioHovered
-    });
+      audioHovered: !this.state.audioHovered,
+    })
   }
 
   volumeChange = (value) => {
     this.setState({
       volume: this.state.mute ? this.state.volume : value,
-      volumeIcon: this.state.mute || value === 0 ? noVolumeIcon : value <= 50 ? quietVolumeIcon : loudVolumeIcon
-    });
+      volumeIcon:
+        this.state.mute || value === 0
+          ? noVolumeIcon
+          : value <= 50
+          ? quietVolumeIcon
+          : loudVolumeIcon,
+    })
   }
 
   toggleMute() {
     this.setState({
-      volumeIcon: !this.state.mute ? noVolumeIcon : this.state.volume <= 50 ? quietVolumeIcon : loudVolumeIcon,
+      volumeIcon: !this.state.mute
+        ? noVolumeIcon
+        : this.state.volume <= 50
+        ? quietVolumeIcon
+        : loudVolumeIcon,
       mute: !this.state.mute,
-    });
+    })
   }
 
   render() {
+    console.log(this.state.timeBtnClass)
     const timeOptions = this.state.timeValues.map((duration) => (
       <StyledButton
         key={duration}
         onMouseEnter={this.handleTimeHover.bind(this)}
         onMouseLeave={this.handleTimeHover.bind(this)}
         onClick={() => {
-          this.timeSelect({ duration });
+          this.timeSelect({ duration })
         }}
         isActive={
           !this.state.timeHovered && duration === this.state.desiredTime
         }
         buttonLabel={`${duration / 60} Minutes`}
       />
-    ));
+    ))
 
     const audioOptions = this.state.audioNames.map((audioName) => (
       <StyledButton
@@ -161,39 +173,39 @@ class App extends Component {
         onMouseEnter={this.handleAudioHover.bind(this)}
         onMouseLeave={this.handleAudioHover.bind(this)}
         onClick={() => {
-          this.audioSelect({ audioName });
+          this.audioSelect({ audioName })
         }}
         isActive={
           !this.state.audioHovered &&
-          this.state.audioUrl === "audio/" + audioName.toLowerCase() + ".mp3"
+          this.state.audioUrl === 'audio/' + audioName.toLowerCase() + '.mp3'
         }
         buttonLabel={audioName}
       />
-    ));
+    ))
 
     return (
-      <div className='App'>
-        <div className='bg-overlay'></div>
+      <div className="App">
+        <div className="bg-overlay"></div>
         <BackgroundImage currentImage={this.state.bgImg} />
-        <div className='time-menu'>{timeOptions}</div>
-        <div className='player-container'>
+        <div className="time-menu">{timeOptions}</div>
+        <div className="player-container">
           <StyledIcon
-            className='playPause'
+            className="playPause"
             url={this.state.pbuttonUrl}
-            alt='Play'
+            alt="Play"
             handleOnClick={this.playPause.bind(this)}
           />
 
-          <div className='volume-control'>
+          <div className="volume-control">
             <StyledIcon
-              className='volume-icon'
+              className="volume-icon"
               url={this.state.volumeIcon}
               handleOnClick={this.toggleMute.bind(this)}
             />
             &nbsp;
-            <div className='volume-slider'>
+            <div className="volume-slider">
               <StyledSlider
-                id='slider'
+                id="slider"
                 onChange={this.volumeChange}
                 step={1}
                 min={0}
@@ -203,9 +215,9 @@ class App extends Component {
             </div>
           </div>
 
-          <div className='audioSeek'>
+          <div className="audioSeek">
             <StyledProgressBar
-              id='seek'
+              id="seek"
               percentage={this.state.seekCurrentPosition}
             />
           </div>
@@ -217,9 +229,9 @@ class App extends Component {
             desiredT={this.state.desiredTime}
             volume={this.state.mute ? 0 : this.state.volume}
           />
-          <div className='timer'>00 : 00</div>
+          <div className="timer">00 : 00</div>
         </div>
-        <div className='audio-menu'>{audioOptions}</div>
+        <div className="audio-menu">{audioOptions}</div>
       </div>
     )
   }
