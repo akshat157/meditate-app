@@ -134,7 +134,7 @@ button .active {
   color: white;
 }
 
-.restart {
+.resetIcon {
   position: absolute;
   width: 50px;
   top: 130px;
@@ -142,6 +142,6 @@ button .active {
   cursor: pointer
 }
 
-.restart:hover{
+.resetIcon:hover{
   transform: translateX(-2px) scale(1.1);
 }

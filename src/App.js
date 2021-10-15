@@ -29,7 +29,7 @@ import {
   parkImg,
   wavesImg,
   streamImg,
-  RestartButton,
+  resetButton,
 } from './constants'
 
 class App extends Component {
@@ -77,8 +77,8 @@ class App extends Component {
     }
   }
 
-  restart() {
-    this.soundCompoRef.current && this.soundCompoRef.current.restart()
+  reset() {
+    this.soundCompoRef.current && this.soundCompoRef.current.reset()
 
     this.setState({
       seekCurrentPosition: 0,
@@ -209,10 +209,10 @@ class App extends Component {
             this.state.audioStatus
           ) && (
             <StyledIcon
-              className="restart"
-              url={RestartButton}
-              alt="Restart"
-              handleOnClick={this.restart.bind(this)}
+              className="resetIcon"
+              url={resetButton}
+              alt="reset"
+              handleOnClick={this.reset.bind(this)}
             />
           )}
           <StyledIcon
