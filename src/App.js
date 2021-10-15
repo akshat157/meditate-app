@@ -29,6 +29,7 @@ import {
   parkImg,
   wavesImg,
   streamImg,
+  resetButton,
 } from './constants'
 
 class App extends Component {
@@ -49,6 +50,7 @@ class App extends Component {
       mute: false, // Default
       volumeIcon: loudVolumeIcon,
     }
+    this.soundCompoRef = React.createRef()
   }
 
   timeSelect(x) {
@@ -58,17 +60,31 @@ class App extends Component {
   }
 
   playPause() {
-    if (this.state.pbuttonUrl === playButton) {
+    if (
+      [Sound.status.STOPPED, Sound.status.PAUSED].includes(
+        this.state.audioStatus
+      )
+    ) {
       this.setState({
         pbuttonUrl: pauseButton,
         audioStatus: Sound.status.PLAYING,
       })
-    } else if (this.state.pbuttonUrl === pauseButton) {
+    } else if (this.state.audioStatus === Sound.status.PLAYING) {
       this.setState({
         pbuttonUrl: playButton,
         audioStatus: Sound.status.PAUSED,
       })
     }
+  }
+
+  reset() {
+    this.soundCompoRef.current && this.soundCompoRef.current.reset()
+
+    this.setState({
+      seekCurrentPosition: 0,
+      pbuttonUrl: playButton,
+      audioStatus: Sound.status.STOPPED,
+    })
   }
 
   audioSelect(name) {
@@ -189,13 +205,22 @@ class App extends Component {
         <BackgroundImage currentImage={this.state.bgImg} />
         <div className="time-menu">{timeOptions}</div>
         <div className="player-container">
+          {[Sound.status.PLAYING, Sound.status.PAUSED].includes(
+            this.state.audioStatus
+          ) && (
+            <StyledIcon
+              className="resetIcon"
+              url={resetButton}
+              alt="reset"
+              handleOnClick={this.reset.bind(this)}
+            />
+          )}
           <StyledIcon
             className="playPause"
             url={this.state.pbuttonUrl}
             alt="Play"
             handleOnClick={this.playPause.bind(this)}
           />
-
           <div className="volume-control">
             <StyledIcon
               className="volume-icon"
@@ -214,15 +239,14 @@ class App extends Component {
               />
             </div>
           </div>
-
           <div className="audioSeek">
             <StyledProgressBar
               id="seek"
               percentage={this.state.seekCurrentPosition}
             />
           </div>
-
           <SoundComponent
+            ref={this.soundCompoRef}
             playStatus={this.state.audioStatus}
             url={this.state.audioUrl}
             funcPerc={this.moveSeek.bind(this)}
