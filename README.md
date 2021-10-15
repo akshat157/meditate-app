@@ -1,8 +1,9 @@
 A meditation app created on ReactJS and bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-![Screenshot from 2019-10-09 20-03-12](https://user-images.githubusercontent.com/34815179/66491471-629c0500-ead0-11e9-9229-7e2161519a28.png)
+![Screenshot from 2019-10-09 20-03-12](https://user-images.githubusercontent.com/66002635/137561336-b1144fd7-1387-4fe6-a67d-30d337e1f4f4.png)
 
 ## How to run?
+
 Clone the repository
 `git clone https://github.com/akshat157/meditate-app`<br>
 Change to the project directory
@@ -28,18 +29,22 @@ The build is minified and the filenames include the hashes.<br>
 Your app is ready to be deployed!
 
 ## Resources
-* [react-circular-progressbar](https://github.com/kevinsqi/react-circular-progressbar), used this react component to make the seek for audio.
-* [react-sound](https://github.com/leoasis/react-sound) component. Used this to make the whole sound component and perform operations on it.
-* All sounds were downloaded from https://www.zapsplat.com/ and belong to their respective owners.
-* Background images were downloaded from [Google Images](https://images.google.com) and belong to the respective owners.
+
+- [react-circular-progressbar](https://github.com/kevinsqi/react-circular-progressbar), used this react component to make the seek for audio.
+- [react-sound](https://github.com/leoasis/react-sound) component. Used this to make the whole sound component and perform operations on it.
+- All sounds were downloaded from https://www.zapsplat.com/ and belong to their respective owners.
+- Background images were downloaded from [Google Images](https://images.google.com) and belong to the respective owners.
 
 ## Contribute to this project
+
 Feel free to contributing to this project! Please read [CONTRIBUTING.md](https://github.com/akshat157/meditate-app/blob/master/CONTRIBUTING.md) to know the basic guidelines. :)
 
 ## Acknowledgments
+
 Shoutouts to
-* [Dev Ed](https://www.youtube.com/channel/UClb90NQQcskPUGDIXsQEz5Q)'s amazing [tutorial](https://www.youtube.com/watch?v=oMBXdZzYqEk) for the same project but using vanilla JS, HTML and CSS.
-* My friend [@Adi2612](https://github.com/Adi2612/) for helping me solve some major issues.
-* Google, Stackoverflow and the whole open source community! <3
+
+- [Dev Ed](https://www.youtube.com/channel/UClb90NQQcskPUGDIXsQEz5Q)'s amazing [tutorial](https://www.youtube.com/watch?v=oMBXdZzYqEk) for the same project but using vanilla JS, HTML and CSS.
+- My friend [@Adi2612](https://github.com/Adi2612/) for helping me solve some major issues.
+- Google, Stackoverflow and the whole open source community! <3
 
 Do :star: the project if you find it good enough. Thanks!
