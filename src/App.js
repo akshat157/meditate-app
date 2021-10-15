@@ -195,22 +195,25 @@ class App extends Component {
         <BackgroundImage currentImage={this.state.bgImg} />
         <div className="time-menu">{timeOptions}</div>
         <div className="player-container">
-          <StyledIcon
-            className="restart"
-            url={RestartButton}
-            alt="Restart"
-            handleOnClick={() =>
-              this.soundCompoRef.current && this.soundCompoRef.current.restart()
-            }
-          />
-
+          {[Sound.status.PLAYING, Sound.status.PAUSED].includes(
+            this.state.audioStatus
+          ) && (
+            <StyledIcon
+              className="restart"
+              url={RestartButton}
+              alt="Restart"
+              handleOnClick={() =>
+                this.soundCompoRef.current &&
+                this.soundCompoRef.current.restart()
+              }
+            />
+          )}
           <StyledIcon
             className="playPause"
             url={this.state.pbuttonUrl}
             alt="Play"
             handleOnClick={this.playPause.bind(this)}
           />
-
           <div className="volume-control">
             <StyledIcon
               className="volume-icon"
@@ -229,14 +232,12 @@ class App extends Component {
               />
             </div>
           </div>
-
           <div className="audioSeek">
             <StyledProgressBar
               id="seek"
               percentage={this.state.seekCurrentPosition}
             />
           </div>
-
           <SoundComponent
             ref={this.soundCompoRef}
             playStatus={this.state.audioStatus}
