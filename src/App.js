@@ -60,12 +60,16 @@ class App extends Component {
   }
 
   playPause() {
-    if (this.state.pbuttonUrl === playButton) {
+    if (
+      [Sound.status.STOPPED, Sound.status.PAUSED].includes(
+        this.state.audioStatus
+      )
+    ) {
       this.setState({
         pbuttonUrl: pauseButton,
         audioStatus: Sound.status.PLAYING,
       })
-    } else if (this.state.pbuttonUrl === pauseButton) {
+    } else if (this.state.audioStatus === Sound.status.PLAYING) {
       this.setState({
         pbuttonUrl: playButton,
         audioStatus: Sound.status.PAUSED,
@@ -74,7 +78,13 @@ class App extends Component {
   }
 
   restart() {
-    console.log(this.state.position)
+    this.soundCompoRef.current && this.soundCompoRef.current.restart()
+
+    this.setState({
+      seekCurrentPosition: 0,
+      pbuttonUrl: playButton,
+      audioStatus: Sound.status.STOPPED,
+    })
   }
 
   audioSelect(name) {
@@ -202,10 +212,7 @@ class App extends Component {
               className="restart"
               url={RestartButton}
               alt="Restart"
-              handleOnClick={() =>
-                this.soundCompoRef.current &&
-                this.soundCompoRef.current.restart()
-              }
+              handleOnClick={this.restart.bind(this)}
             />
           )}
           <StyledIcon
