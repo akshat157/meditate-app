@@ -29,6 +29,7 @@ import {
   parkImg,
   wavesImg,
   streamImg,
+  RestartButton,
 } from './constants'
 
 class App extends Component {
@@ -49,6 +50,7 @@ class App extends Component {
       mute: false, // Default
       volumeIcon: loudVolumeIcon,
     }
+    this.soundCompoRef = React.createRef()
   }
 
   timeSelect(x) {
@@ -69,6 +71,10 @@ class App extends Component {
         audioStatus: Sound.status.PAUSED,
       })
     }
+  }
+
+  restart() {
+    console.log(this.state.position)
   }
 
   audioSelect(name) {
@@ -190,6 +196,15 @@ class App extends Component {
         <div className="time-menu">{timeOptions}</div>
         <div className="player-container">
           <StyledIcon
+            className="restart"
+            url={RestartButton}
+            alt="Restart"
+            handleOnClick={() =>
+              this.soundCompoRef.current && this.soundCompoRef.current.restart()
+            }
+          />
+
+          <StyledIcon
             className="playPause"
             url={this.state.pbuttonUrl}
             alt="Play"
@@ -223,6 +238,7 @@ class App extends Component {
           </div>
 
           <SoundComponent
+            ref={this.soundCompoRef}
             playStatus={this.state.audioStatus}
             url={this.state.audioUrl}
             funcPerc={this.moveSeek.bind(this)}

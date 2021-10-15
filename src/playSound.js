@@ -5,6 +5,7 @@ class SoundComponent extends Component {
   constructor(props) {
     super(props)
     this.handleSongPlaying = this.handleSongPlaying.bind(this)
+    this.restart = this.restart.bind(this)
     this.state = {
       position: 0,
       loopCount: 0,
@@ -24,6 +25,10 @@ class SoundComponent extends Component {
 
     timer.innerHTML = `${min} : ${sec}`
     this.props.funcPerc(pos / 1000)
+  }
+
+  restart() {
+    this.setState({ position: 0 })
   }
 
   render() {
