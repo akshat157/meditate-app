@@ -31,7 +31,6 @@ button {
   border: 2px #ffffffcc solid;
   padding: 16px;
   width: 130px;
-  /* box-shadow: #000000fa 1px 1px 2px 0; */
   border-radius: 2%;
   color: #fff;
   font-size: 14px;
@@ -66,12 +65,7 @@ button:hover, button.active {
   flex-direction: column;
 }
 
-.time-menu {
-  /* background-color: #ffafaf;  */
-}
-
 .player-container {
-  /* background-color: #afafff; */
   position: relative;
 }
 
@@ -83,10 +77,6 @@ button:hover, button.active {
 .player-container .timer {
   position: absolute;
   bottom: 10%;
-}
-
-.audio-menu {
-  /* background-color: #afffaf;  */
 }
 
 .playPause {
@@ -119,7 +109,19 @@ button:hover, button.active {
 }
 
 .timer {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 32px;
   color: white;
+}
+
+.resetIcon {
+  position: absolute;
+  width: 50px;
+  top: 130px;
+  transform: translateX(-2px);
+  cursor: pointer
+}
+
+.resetIcon:hover{
+  transform: translateX(-2px) scale(1.1);
 }
