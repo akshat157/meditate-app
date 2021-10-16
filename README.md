@@ -1,6 +1,6 @@
 A meditation app created on ReactJS and bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-![Screenshot from 2019-10-09 20-03-12](https://user-images.githubusercontent.com/66002635/137561336-b1144fd7-1387-4fe6-a67d-30d337e1f4f4.png)
+![Screenshot from 2019-10-09 20-03-12](https://user-images.githubusercontent.com/66002635/137586803-ba44a787-96e3-45df-8f74-91ee528b55e8.png)
 
 ## How to run?
 

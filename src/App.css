@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;500&family=Maven+Pro:wght@400;500&display=swap');
+
 * {
   margin: 0;
   padding: 0;
@@ -36,6 +38,7 @@ button {
   color: #fff;
   font-size: 14px;
   transition: all 0.3s ease;
+  font-family: "Barlow", "Maven Pro", sans-serif;
 }
 
 button:hover {
