@@ -215,6 +215,7 @@ class App extends Component {
               handleOnClick={this.reset.bind(this)}
             />
           )}
+          
           <div
             className={this.state.pbuttonUrl === playButton ? "playPauseBtn pauseMode" : "playPauseBtn playMode"}
             alt="Play"
@@ -223,6 +224,7 @@ class App extends Component {
             <img className="pauseIcon" src={pauseButton} alt=""/>
             <img className="playIcon" src={playButton} alt=""/>
           </div>
+
           <div className="volume-control">
             <StyledIcon
               className="volume-icon"
