@@ -49,6 +49,8 @@ class App extends Component {
       volume: 100, // Default
       mute: false, // Default
       volumeIcon: loudVolumeIcon,
+      opacity: 1, 
+      transition: '',
     }
     this.soundCompoRef = React.createRef()
   }
@@ -75,6 +77,8 @@ class App extends Component {
         audioStatus: Sound.status.PAUSED,
       })
     }
+    this.setState({ opacity: (this.state.opacity=== 1 && this.state.pbuttonUrl === playButton)? 0 : 1 })
+    this.setState({ transition:'opacity 40s ease-out' })
   }
 
   reset() {
@@ -85,6 +89,11 @@ class App extends Component {
       pbuttonUrl: playButton,
       audioStatus: Sound.status.STOPPED,
     })
+  }
+
+  _onMouseMove = (e) => {
+    this.setState({ opacity: this.state.opacity=== 0 ? 1 : 1 })
+    this.setState({ transition:'opacity 0s' })
   }
 
   audioSelect(name) {
@@ -203,8 +212,8 @@ class App extends Component {
       <div className="App">
         <div className="bg-overlay"></div>
         <BackgroundImage currentImage={this.state.bgImg} />
-        <div className="time-menu">{timeOptions}</div>
-        <div className="player-container">
+        <div className="time-menu" style={{ opacity: this.state.opacity, transition: this.state.transition}} onMouseMove={this._onMouseMove}>{timeOptions}</div>
+        <div className="player-container" style={{ opacity: this.state.opacity, transition: this.state.transition}} onMouseMove={this._onMouseMove}>
           {[Sound.status.PLAYING, Sound.status.PAUSED].includes(
             this.state.audioStatus
           ) && (
@@ -259,7 +268,7 @@ class App extends Component {
           />
           <div className="timer">00 : 00</div>
         </div>
-        <div className="audio-menu">{audioOptions}</div>
+        <div className="audio-menu" style={{ opacity: this.state.opacity, transition: this.state.transition}} onMouseMove={this._onMouseMove}>{audioOptions}</div>
       </div>
     )
   }
