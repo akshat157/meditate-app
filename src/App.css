@@ -31,7 +31,6 @@ button {
   border: 2px #ffffffcc solid;
   padding: 16px;
   width: 130px;
-  /* box-shadow: #000000fa 1px 1px 2px 0; */
   border-radius: 2%;
   color: #fff;
   font-size: 14px;
@@ -86,12 +85,7 @@ button .active {
   flex-direction: column;
 }
 
-.time-menu {
-  /* background-color: #ffafaf;  */
-}
-
 .player-container {
-  /* background-color: #afafff; */
   position: relative;
 }
 
@@ -103,15 +97,6 @@ button .active {
 .player-container .timer {
   position: absolute;
   bottom: 10%;
-}
-
-.audio-menu {
-  /* background-color: #afffaf;  */
-}
-
-.playPause {
-  width: 40px;
-  z-index: 10;
 }
 
 .audioSeek {
@@ -139,7 +124,98 @@ button .active {
 }
 
 .timer {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 32px;
   color: white;
 }
+
+.resetIcon {
+  position: absolute;
+  width: 50px;
+  top: 130px;
+  transform: translateX(-2px);
+  cursor: pointer;
+}
+
+.resetIcon:hover {
+  transform: translateX(-2px) scale(1.1);
+}
+
+.playPauseBtn {
+  width: 40px;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+}
+.playIcon,
+.pauseIcon {
+  width: 40px;
+  transform-style: preserve-3d;
+  cursor: pointer;
+  transform: scale(0);
+}
+
+.playIcon {
+  transform-origin: left;
+}
+.pauseIcon {
+  transform-origin: right;
+}
+
+.playPauseBtn.playMode {
+  transform: translateX(20px);
+  transition: all 0.5s ease-out;
+}
+
+.playPauseBtn.pauseMode {
+  transform: translateX(-20px);
+  transition: all 0.5s ease-out;
+}
+
+.playMode .playIcon {
+  transform: rotateY(90deg) scale(1.1);
+  transition: all 0.5s ease-out;
+}
+.playMode .pauseIcon {
+  transform: rotateY(0deg) scale(1.1);
+  transition: all 0.5s ease-out;
+}
+
+.pauseMode .playIcon {
+  transform: rotateY(0deg) scale(1.1);
+  transition: all 0.5s ease-out;
+}
+.pauseMode .pauseIcon {
+  transform: rotateY(-90deg) scale(1.1);
+  transition: all 0.5s ease-out;
+}
+
+/* playpause btn hover effect */
+.playPauseBtn.playMode:hover {
+  transform: translateX(20px) scale(1.1);
+  transition: all 0.5s ease-out;
+}
+
+.playPauseBtn.pauseMode:hover {
+  transform: translateX(-20px) scale(1.1);
+  transition: all 0.5s ease-out;
+}
+
+.playMode .playIcon:hover {
+  transform: rotateY(90deg) scale(1.1);
+  transition: all 0.5s ease-out;
+}
+.playMode .pauseIcon:hover {
+  transform: rotateY(0deg) scale(1.1);
+  transition: all 0.5s ease-out;
+}
+
+.pauseMode .playIcon:hover {
+  transform: rotateY(0deg) scale(1.1);
+  transition: all 0.5s ease-out;
+}
+.pauseMode .pauseIcon:hover {
+  transform: rotateY(-90deg) scale(1.1);
+  transition: all 0.5s ease-out;
+}
+
