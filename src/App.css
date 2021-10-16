@@ -99,11 +99,6 @@ button .active {
   bottom: 10%;
 }
 
-.playPause {
-  width: 40px;
-  z-index: 10;
-}
-
 .audioSeek {
   width: 60%;
 }
@@ -139,9 +134,88 @@ button .active {
   width: 50px;
   top: 130px;
   transform: translateX(-2px);
-  cursor: pointer
+  cursor: pointer;
 }
 
-.resetIcon:hover{
+.resetIcon:hover {
   transform: translateX(-2px) scale(1.1);
 }
+
+.playPauseBtn {
+  width: 40px;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+}
+.playIcon,
+.pauseIcon {
+  width: 40px;
+  transform-style: preserve-3d;
+  cursor: pointer;
+  transform: scale(0);
+}
+
+.playIcon {
+  transform-origin: left;
+}
+.pauseIcon {
+  transform-origin: right;
+}
+
+.playPauseBtn.playMode {
+  transform: translateX(20px);
+  transition: all 0.5s ease-out;
+}
+
+.playPauseBtn.pauseMode {
+  transform: translateX(-20px);
+  transition: all 0.5s ease-out;
+}
+
+.playMode .playIcon {
+  transform: rotateY(90deg) scale(1.1);
+  transition: all 0.5s ease-out;
+}
+.playMode .pauseIcon {
+  transform: rotateY(0deg) scale(1.1);
+  transition: all 0.5s ease-out;
+}
+
+.pauseMode .playIcon {
+  transform: rotateY(0deg) scale(1.1);
+  transition: all 0.5s ease-out;
+}
+.pauseMode .pauseIcon {
+  transform: rotateY(-90deg) scale(1.1);
+  transition: all 0.5s ease-out;
+}
+
+/* playpause btn hover effect */
+.playPauseBtn.playMode:hover {
+  transform: translateX(20px) scale(1.1);
+  transition: all 0.5s ease-out;
+}
+
+.playPauseBtn.pauseMode:hover {
+  transform: translateX(-20px) scale(1.1);
+  transition: all 0.5s ease-out;
+}
+
+.playMode .playIcon:hover {
+  transform: rotateY(90deg) scale(1.1);
+  transition: all 0.5s ease-out;
+}
+.playMode .pauseIcon:hover {
+  transform: rotateY(0deg) scale(1.1);
+  transition: all 0.5s ease-out;
+}
+
+.pauseMode .playIcon:hover {
+  transform: rotateY(0deg) scale(1.1);
+  transition: all 0.5s ease-out;
+}
+.pauseMode .pauseIcon:hover {
+  transform: rotateY(-90deg) scale(1.1);
+  transition: all 0.5s ease-out;
+}
+
