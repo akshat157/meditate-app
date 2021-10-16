@@ -38,27 +38,7 @@ button {
   transition: all 0.3s ease;
 }
 
-button:hover {
-  box-shadow: none;
-  color: #000;
-  background-color: #ffffffcc;
-  border: none;
-  width: 140px;
-  padding: 24px;
-  font-size: 17px;
-}
-
-button .active {
-  box-shadow: none;
-  color: #000;
-  background-color: #ffffffcc;
-  border: none;
-  width: 140px;
-  padding: 24px;
-  font-size: 17px;
-}
-
-.active {
+button:hover, button.active {
   box-shadow: none;
   color: #000;
   background-color: #ffffffcc;

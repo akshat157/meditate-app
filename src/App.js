@@ -138,16 +138,37 @@ class App extends Component {
 
   render() {
 
-    console.log(this.state.timeBtnClass);
-    const timeOptions = this.state.timeValues.map((duration) =>
-      <button key={duration} onMouseEnter={this.handleTimeHover.bind(this)} onMouseLeave={this.handleTimeHover.bind(this)} className={ !this.state.timeHovered && duration === this.state.desiredTime 
-                                          ? "active" : "" } onClick={ () => {this.timeSelect({duration})} }>{duration/60} Minutes</button>
-    );
+		const timeOptions = this.state.timeValues.map(duration => (
+			<button
+				key={duration}
+				onMouseEnter={this.handleTimeHover.bind(this)}
+				onMouseLeave={this.handleTimeHover.bind(this)}
+				className={duration === this.state.desiredTime ? "active" : ""}
+				onClick={() => {
+					this.timeSelect({ duration });
+				}}
+			>
+				{duration / 60} Minutes
+			</button>
+		));
 
-    const audioOptions = this.state.audioNames.map((audioName) =>
-      <button key={audioName} onMouseEnter={this.handleAudioHover.bind(this)} onMouseLeave={this.handleAudioHover.bind(this)} className={ !this.state.audioHovered && this.state.audioUrl === "audio/" + audioName.toLowerCase() + ".mp3" 
-                                          ? "active" : "" } onClick={ () => {this.audioSelect({audioName})} }>{audioName}</button>
-    );
+		const audioOptions = this.state.audioNames.map(audioName => (
+			<button
+				key={audioName}
+				onMouseEnter={this.handleAudioHover.bind(this)}
+				onMouseLeave={this.handleAudioHover.bind(this)}
+				className={
+					this.state.audioUrl === "audio/" + audioName.toLowerCase() + ".mp3"
+						? "active"
+						: ""
+				}
+				onClick={() => {
+					this.audioSelect({ audioName });
+				}}
+			>
+				{audioName}
+			</button>
+		));
 
     return (
       <div className="App">
