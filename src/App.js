@@ -213,6 +213,12 @@ class App extends Component {
             />
           )}
 
+          <div className="audioSeek">
+            <StyledProgressBar
+              id="seek"
+              percentage={this.state.seekCurrentPosition}
+            />
+          </div>
           <div
             className={
               this.state.pbuttonUrl === playButton
@@ -244,12 +250,7 @@ class App extends Component {
               />
             </div>
           </div>
-          <div className="audioSeek">
-            <StyledProgressBar
-              id="seek"
-              percentage={this.state.seekCurrentPosition}
-            />
-          </div>
+
           <SoundComponent
             ref={this.soundCompoRef}
             playStatus={this.state.audioStatus}

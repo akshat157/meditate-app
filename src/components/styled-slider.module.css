@@ -23,6 +23,7 @@
   outline: none;
   border: none;
   z-index: 2222;
+  cursor: pointer;
 }
 .range input::-webkit-slider-thumb {
   -webkit-appearance: none;
