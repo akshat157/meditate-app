@@ -16,14 +16,16 @@ class SoundComponent extends Component {
     this.setState({ position })
 
     var pos = position + this.state.loopCount * duration //loopCount to multiply for duration
-    const timer = document.querySelector('.timer')
+    const timerMin = document.querySelector('.timer .min')
+    const timerSec = document.querySelector('.timer .sec')
     var min = Math.floor(pos / (1000 * 60))
     var sec = Math.floor((pos / 1000) % 60)
 
     min = ('0' + min).slice(-2)
     sec = ('0' + sec).slice(-2)
 
-    timer.innerHTML = `${min} : ${sec}`
+    timerMin.innerHTML = `${min}`
+    timerSec.innerHTML = `${sec}`
     this.props.funcPerc(pos / 1000)
   }
 

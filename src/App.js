@@ -232,6 +232,18 @@ class App extends Component {
             <img className="playIcon" src={playButton} alt="" />
           </div>
 
+          <SoundComponent
+            ref={this.soundCompoRef}
+            playStatus={this.state.audioStatus}
+            url={this.state.audioUrl}
+            funcPerc={this.moveSeek.bind(this)}
+            desiredT={this.state.desiredTime}
+            volume={this.state.mute ? 0 : this.state.volume}
+          />
+          <div className="timer">
+            <span className="min">00</span> : <span className="sec">00</span>
+          </div>
+
           <div className="volume-control">
             <StyledIcon
               className="volume-icon"
@@ -250,16 +262,6 @@ class App extends Component {
               />
             </div>
           </div>
-
-          <SoundComponent
-            ref={this.soundCompoRef}
-            playStatus={this.state.audioStatus}
-            url={this.state.audioUrl}
-            funcPerc={this.moveSeek.bind(this)}
-            desiredT={this.state.desiredTime}
-            volume={this.state.mute ? 0 : this.state.volume}
-          />
-          <div className="timer">00 : 00</div>
         </div>
         <div className="audio-menu">{audioOptions}</div>
       </div>

@@ -118,9 +118,19 @@ button.active {
 }
 
 .timer {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Barlow', 'Maven Pro', sans-serif;
+  width: 120px;
+  display: flex;
+  justify-content: space-between;
   font-size: 32px;
   color: white;
+}
+
+.timer .min,
+.timer .sec {
+  width: 50px;
+  display: flex;
+  justify-content: center;
 }
 
 .resetIcon {
