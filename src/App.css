@@ -40,7 +40,7 @@ button {
   font-family: "Barlow", "Maven Pro", sans-serif;
 }
 
-button:hover {
+button:hover, button.active {
   box-shadow: none;
   color: #000;
   background-color: #ffffffcc;
@@ -49,26 +49,6 @@ button:hover {
   padding: 24px;
   font-size: 17px;
   cursor: pointer;
-}
-
-button .active {
-  box-shadow: none;
-  color: #000;
-  background-color: #ffffffcc;
-  border: none;
-  width: 140px;
-  padding: 24px;
-  font-size: 17px;
-}
-
-.active {
-  box-shadow: none;
-  color: #000;
-  background-color: #ffffffcc;
-  border: none;
-  width: 140px;
-  padding: 24px;
-  font-size: 17px;
 }
 
 .App {

@@ -167,7 +167,6 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state.timeBtnClass)
     const timeOptions = this.state.timeValues.map((duration) => (
       <StyledButton
         key={duration}
@@ -176,9 +175,7 @@ class App extends Component {
         onClick={() => {
           this.timeSelect({ duration })
         }}
-        isActive={
-          !this.state.timeHovered && duration === this.state.desiredTime
-        }
+        isActive={duration === this.state.desiredTime}
         buttonLabel={`${duration / 60} Minutes`}
       />
     ))
@@ -192,7 +189,6 @@ class App extends Component {
           this.audioSelect({ audioName })
         }}
         isActive={
-          !this.state.audioHovered &&
           this.state.audioUrl === 'audio/' + audioName.toLowerCase() + '.mp3'
         }
         buttonLabel={audioName}
