@@ -13,6 +13,12 @@
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+  opacity: 0;
+  transition: 0.5s ease-in opacity;
+}
+.bg.activeBg{
+  transition: 0.5s ease-in opacity;
+  opacity: 1;
 }
 
 .bg-overlay {
