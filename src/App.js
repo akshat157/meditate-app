@@ -211,12 +211,16 @@ class App extends Component {
               handleOnClick={this.reset.bind(this)}
             />
           )}
-          <StyledIcon
-            className="playPause"
-            url={this.state.pbuttonUrl}
+          
+          <div
+            className={this.state.pbuttonUrl === playButton ? "playPauseBtn pauseMode" : "playPauseBtn playMode"}
             alt="Play"
-            handleOnClick={this.playPause.bind(this)}
-          />
+            onClick={this.playPause.bind(this)}
+          >
+            <img className="pauseIcon" src={pauseButton} alt=""/>
+            <img className="playIcon" src={playButton} alt=""/>
+          </div>
+
           <div className="volume-control">
             <StyledIcon
               className="volume-icon"
