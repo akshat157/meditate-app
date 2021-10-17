@@ -23673,7 +23673,10 @@
         },
         "kind-of": {
           "version": "6.0.2",
+<<<<<<< HEAD
+=======
           "resolved": "https://registry.npmjs.org/kind-of/-/kind-of-6.0.2.tgz",
+>>>>>>> cf8d247015a1c80117674273d1212964b708809a
           "integrity": "sha512-s5kLOcnH0XqDO+FvuaLX8DDjZ18CGFk7VygH40QoKPUQhW4e2rvM0rwUq0t8IQDOwYSeLK01U90OjzBTme2QqA=="
         }
       }
@@ -26036,7 +26039,10 @@
     },
     "dot-prop": {
       "version": "4.2.0",
+<<<<<<< HEAD
+=======
       "resolved": "https://registry.npmjs.org/dot-prop/-/dot-prop-4.2.0.tgz",
+>>>>>>> cf8d247015a1c80117674273d1212964b708809a
       "integrity": "sha512-tUMXrxlExSW6U2EXiiKGSBVdYgtV8qlHL+C10TsW4PURY/ic+eaysnSkwB4kA/mBlCyy/IKDJ+Lc3wbWeaXtuQ==",
       "requires": {
         "is-obj": "^1.0.0"
@@ -36150,7 +36156,10 @@
         },
         "kind-of": {
           "version": "6.0.2",
+<<<<<<< HEAD
+=======
           "resolved": "https://registry.npmjs.org/kind-of/-/kind-of-6.0.2.tgz",
+>>>>>>> cf8d247015a1c80117674273d1212964b708809a
           "integrity": "sha512-s5kLOcnH0XqDO+FvuaLX8DDjZ18CGFk7VygH40QoKPUQhW4e2rvM0rwUq0t8IQDOwYSeLK01U90OjzBTme2QqA=="
         }
       }
