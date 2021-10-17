@@ -1,15 +1,15 @@
-import React from "react";
-import style from "./styled-slider.module.css";
+import React from 'react'
+import style from './styled-slider.module.css'
 
 function StyledSlider(props) {
-	const { value } = props;
+  const { value } = props
 
-	return (
-		<div className={style.range}>
-			<div className={style.sliderBg} style={{ width: `${value}px` }}></div>
-			<input type="range" {...props} />
-		</div>
-	);
+  return (
+    <div className={style.range}>
+      <div className={style.sliderBg} style={{ width: `${value}%` }}></div>
+      <input type="range" {...props} />
+    </div>
+  )
 }
 
-export default StyledSlider;
+export default StyledSlider

@@ -144,7 +144,7 @@ class App extends Component {
   }
 
   volumeChange = (event) => {
-    const value = Number(event.target.value);
+    const value = Number(event.target.value)
     this.setState({
       volume: this.state.mute ? this.state.volume : value,
       volumeIcon:
@@ -212,14 +212,18 @@ class App extends Component {
               handleOnClick={this.reset.bind(this)}
             />
           )}
-          
+
           <div
-            className={this.state.pbuttonUrl === playButton ? "playPauseBtn pauseMode" : "playPauseBtn playMode"}
+            className={
+              this.state.pbuttonUrl === playButton
+                ? 'playPauseBtn pauseMode'
+                : 'playPauseBtn playMode'
+            }
             alt="Play"
             onClick={this.playPause.bind(this)}
           >
-            <img className="pauseIcon" src={pauseButton} alt=""/>
-            <img className="playIcon" src={playButton} alt=""/>
+            <img className="pauseIcon" src={pauseButton} alt="" />
+            <img className="playIcon" src={playButton} alt="" />
           </div>
 
           <div className="volume-control">
