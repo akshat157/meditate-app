@@ -115,6 +115,12 @@ button.active {
 .volume-icon {
   filter: invert(100%);
   cursor: pointer;
+  transition: all 0.3s ease-out;
+}
+
+.volume-icon:hover {
+  transition: all 0.3s ease-out;
+  transform: scale(1.1);
 }
 
 .timer {
