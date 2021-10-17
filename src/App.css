@@ -142,7 +142,7 @@ button.active {
 .resetIcon {
   position: absolute;
   width: 50px;
-  top: 130px;
+  top: 15%;
   cursor: pointer;
   transition: all 0.3s ease-out;
 }
