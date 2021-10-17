@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "rc-slider": "^9.5.4",
     "react": "^16.8.6",
     "react-circular-progressbar": "^1.0.0",
     "react-dom": "^16.8.6",

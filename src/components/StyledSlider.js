@@ -1,35 +1,15 @@
-import React from 'react'
-import Slider from 'rc-slider'
-import 'rc-slider/assets/index.css'
+import React from "react";
+import style from "./styled-slider.module.css";
 
 function StyledSlider(props) {
-  // Overall style
-  const style = { height: 20, padding: 0 }
-  // The style used for handle.
-  const handleStyle = { display: 'none' }
-  // The style used for the track base color.
-  const railStyle = {
-    margin: 0,
-    borderRadius: 0,
-    height: 20,
-    backgroundColor: '#ffffff',
-    opacity: 0.2,
-  }
-  // The style used for track
-  const trackStyle = {
-    borderRadius: 0,
-    height: 20,
-    backgroundColor: '#ffffff',
-  }
-  return (
-    <Slider
-      style={style}
-      handleStyle={handleStyle}
-      railStyle={railStyle}
-      trackStyle={trackStyle}
-      {...props}
-    />
-  )
+	const { value } = props;
+
+	return (
+		<div className={style.range}>
+			<div className={style.sliderBg} style={{ width: `${value}px` }}></div>
+			<input type="range" {...props} />
+		</div>
+	);
 }
 
-export default StyledSlider
+export default StyledSlider;
