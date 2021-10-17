@@ -143,7 +143,8 @@ class App extends Component {
     })
   }
 
-  volumeChange = (value) => {
+  volumeChange = (event) => {
+    const value = Number(event.target.value);
     this.setState({
       volume: this.state.mute ? this.state.volume : value,
       volumeIcon:
