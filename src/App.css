@@ -67,7 +67,8 @@ button.active {
 
 .time-menu,
 .player-container,
-.audio-menu {
+.audio-menu,
+.reset {
   flex: 1;
   height: 90%;
   display: flex;
