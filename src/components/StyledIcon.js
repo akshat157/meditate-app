@@ -1,12 +1,12 @@
 import React from 'react'
 
-function StyledIcon({ className, url, alt = '', handleOnClick }) {
+function StyledIcon(props) {
+  const { alt = '', handleOnClick } = props
   return (
     <img
-      className={className}
-      src={url}
       alt={alt}
       onClick={() => handleOnClick()}
+      {...props}
     />
   )
 }

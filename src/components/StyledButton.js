@@ -6,12 +6,13 @@ function StyledButton({
   onClick,
   isActive,
   buttonLabel,
+  className
 }) {
   return (
     <button
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
-      className={isActive ? 'active' : ''}
+      className={isActive ? `active ${className}` : className}
       onClick={onClick}
     >
       {buttonLabel}

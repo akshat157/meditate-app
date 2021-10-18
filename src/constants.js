@@ -1,6 +1,7 @@
 export const playButton = 'svg/play.svg'
 export const pauseButton = 'svg/pause.svg'
 export const resetButton = 'svg/reset.svg'
+export const arrowButton = 'svg/arrow.svg'
 
 export const rainAudio = 'audio/rain.mp3'
 export const forestAudio = 'audio/forest.mp3'

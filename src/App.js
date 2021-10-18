@@ -182,51 +182,58 @@ class App extends Component {
         <div className="bg-overlay"></div>
         <BackgroundImage currentImage={this.state.bgImg} />
 
-        <main>
+        <main className="main">
           <div className="player-container">
             <StyledCounter
               setDuration={(duration) => {
                 // unit of "duration" is minutes
                 this.timeSelect({ duration: duration * 60 }) // convert minutes to seconds
               }}
-              duration={this.state.desiredTime}
+              duration={this.state.desiredTime / 60} // unit of "desiredTime" is seconds, convert seconds to minutes
             />
-            {[Sound.status.PLAYING, Sound.status.PAUSED].includes(
-              this.state.audioStatus
-            ) && (
+            <div className="middleWrap">
               <StyledIcon
                 className="resetIcon"
-                url={resetButton}
+                src={resetButton}
                 alt="reset"
+                style={{
+                  visibility: [
+                    Sound.status.PLAYING,
+                    Sound.status.PAUSED,
+                  ].includes(this.state.audioStatus)
+                    ? 'visible'
+                    : 'hidden',
+                }}
                 handleOnClick={this.reset.bind(this)}
               />
-            )}
-
-            <div className="audioSeek">
-              <StyledProgressBar
-                id="seek"
-                percentage={this.state.seekCurrentPosition}
-              />
-              <div
-                className={
-                  this.state.pbuttonUrl === playButton
-                    ? 'playPauseBtn pauseMode'
-                    : 'playPauseBtn playMode'
-                }
-                alt="Play"
-                onClick={this.playPause.bind(this)}
-              >
-                <img className="pauseIcon" src={pauseButton} alt="" />
-                <img className="playIcon" src={playButton} alt="" />
+              <div className="audioSeek">
+                <StyledProgressBar
+                  id="seek"
+                  percentage={this.state.seekCurrentPosition}
+                />
+                <div
+                  className={
+                    this.state.pbuttonUrl === playButton
+                      ? 'playPauseBtn pauseMode'
+                      : 'playPauseBtn playMode'
+                  }
+                  alt="Play"
+                  onClick={this.playPause.bind(this)}
+                >
+                  <img className="pauseIcon" src={pauseButton} alt="" />
+                  <img className="playIcon" src={playButton} alt="" />
+                </div>
+              </div>
+              <div className="timer">
+                <span className="min">00</span>
+                <span> : </span>
+                <span className="sec">00</span>
               </div>
             </div>
-
-            <div className="timer">00 : 00</div>
-
             <div className="volume-control">
               <StyledIcon
                 className="volume-icon"
-                url={this.state.volumeIcon}
+                src={this.state.volumeIcon}
                 handleOnClick={this.toggleMute.bind(this)}
               />
               &nbsp;
@@ -241,7 +248,6 @@ class App extends Component {
                 />
               </div>
             </div>
-
             <SoundComponent
               ref={this.soundCompoRef}
               playStatus={this.state.audioStatus}
