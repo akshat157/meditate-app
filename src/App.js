@@ -152,7 +152,8 @@ class App extends Component {
     })
   }
 
-  volumeChange = (value) => {
+  volumeChange = (event) => {
+    const value = Number(event.target.value)
     this.setState({
       volume: this.state.mute ? this.state.volume : value,
       volumeIcon:
@@ -176,7 +177,6 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state.timeBtnClass)
     const timeOptions = this.state.timeValues.map((duration) => (
       <StyledButton
         key={duration}
@@ -185,9 +185,7 @@ class App extends Component {
         onClick={() => {
           this.timeSelect({ duration })
         }}
-        isActive={
-          !this.state.timeHovered && duration === this.state.desiredTime
-        }
+        isActive={duration === this.state.desiredTime}
         buttonLabel={`${duration / 60} Minutes`}
       />
     ))
@@ -201,7 +199,6 @@ class App extends Component {
           this.audioSelect({ audioName })
         }}
         isActive={
-          !this.state.audioHovered &&
           this.state.audioUrl === 'audio/' + audioName.toLowerCase() + '.mp3'
         }
         buttonLabel={audioName}
@@ -224,14 +221,36 @@ class App extends Component {
               handleOnClick={this.reset.bind(this)}
             />
           )}
-          
+
+          <div className="audioSeek">
+            <StyledProgressBar
+              id="seek"
+              percentage={this.state.seekCurrentPosition}
+            />
+          </div>
           <div
-            className={this.state.pbuttonUrl === playButton ? "playPauseBtn pauseMode" : "playPauseBtn playMode"}
+            className={
+              this.state.pbuttonUrl === playButton
+                ? 'playPauseBtn pauseMode'
+                : 'playPauseBtn playMode'
+            }
             alt="Play"
             onClick={this.playPause.bind(this)}
           >
-            <img className="pauseIcon" src={pauseButton} alt=""/>
-            <img className="playIcon" src={playButton} alt=""/>
+            <img className="pauseIcon" src={pauseButton} alt="" />
+            <img className="playIcon" src={playButton} alt="" />
+          </div>
+
+          <SoundComponent
+            ref={this.soundCompoRef}
+            playStatus={this.state.audioStatus}
+            url={this.state.audioUrl}
+            funcPerc={this.moveSeek.bind(this)}
+            desiredT={this.state.desiredTime}
+            volume={this.state.mute ? 0 : this.state.volume}
+          />
+          <div className="timer">
+            <span className="min">00</span> : <span className="sec">00</span>
           </div>
 
           <div className="volume-control">
@@ -252,21 +271,6 @@ class App extends Component {
               />
             </div>
           </div>
-          <div className="audioSeek">
-            <StyledProgressBar
-              id="seek"
-              percentage={this.state.seekCurrentPosition}
-            />
-          </div>
-          <SoundComponent
-            ref={this.soundCompoRef}
-            playStatus={this.state.audioStatus}
-            url={this.state.audioUrl}
-            funcPerc={this.moveSeek.bind(this)}
-            desiredT={this.state.desiredTime}
-            volume={this.state.mute ? 0 : this.state.volume}
-          />
-          <div className="timer">00 : 00</div>
         </div>
         <div className="audio-menu" style={{ opacity: this.state.opacity, transition: this.state.transition}} onMouseMove={this._onMouseMove}>{audioOptions}</div>
       </div>
