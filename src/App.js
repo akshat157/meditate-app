@@ -11,6 +11,7 @@ import {
   StyledButton,
   BackgroundImage,
   StyledIcon,
+  StyledCounter,
 } from './components'
 
 import {
@@ -38,13 +39,11 @@ class App extends Component {
     this.state = {
       pbuttonUrl: playButton,
       audioStatus: Sound.status.STOPPED,
-      timeValues: [120, 300, 600, 900],
       audioNames: ['Rain', 'Forest', 'Park', 'Stream', 'Waves'],
       seekCurrentPosition: 0,
       audioUrl: rainAudio, // Default
       bgImg: rainImg,
       desiredTime: 120, // Default
-      timeHovered: false,
       audioHovered: false,
       volume: 100, // Default
       mute: false, // Default
@@ -131,12 +130,6 @@ class App extends Component {
     }
   }
 
-  handleTimeHover() {
-    this.setState({
-      timeHovered: !this.state.timeHovered,
-    })
-  }
-
   handleAudioHover() {
     this.setState({
       audioHovered: !this.state.audioHovered,
@@ -168,22 +161,10 @@ class App extends Component {
   }
 
   render() {
-    const timeOptions = this.state.timeValues.map((duration) => (
-      <StyledButton
-        key={duration}
-        onMouseEnter={this.handleTimeHover.bind(this)}
-        onMouseLeave={this.handleTimeHover.bind(this)}
-        onClick={() => {
-          this.timeSelect({ duration })
-        }}
-        isActive={duration === this.state.desiredTime}
-        buttonLabel={`${duration / 60} Minutes`}
-      />
-    ))
-
     const audioOptions = this.state.audioNames.map((audioName) => (
       <StyledButton
         key={audioName}
+        className="audioButton"
         onMouseEnter={this.handleAudioHover.bind(this)}
         onMouseLeave={this.handleAudioHover.bind(this)}
         onClick={() => {
@@ -200,70 +181,78 @@ class App extends Component {
       <div className="App">
         <div className="bg-overlay"></div>
         <BackgroundImage currentImage={this.state.bgImg} />
-        <div className="time-menu">{timeOptions}</div>
-        <div className="player-container">
-          {[Sound.status.PLAYING, Sound.status.PAUSED].includes(
-            this.state.audioStatus
-          ) && (
-            <StyledIcon
-              className="resetIcon"
-              url={resetButton}
-              alt="reset"
-              handleOnClick={this.reset.bind(this)}
-            />
-          )}
 
-          <div className="audioSeek">
-            <StyledProgressBar
-              id="seek"
-              percentage={this.state.seekCurrentPosition}
+        <main>
+          <div className="player-container">
+            <StyledCounter
+              setDuration={(duration) => {
+                // unit of "duration" is minutes
+                this.timeSelect({ duration: duration * 60 }) // convert minutes to seconds
+              }}
+              duration={this.state.desiredTime}
             />
-          </div>
-          <div
-            className={
-              this.state.pbuttonUrl === playButton
-                ? 'playPauseBtn pauseMode'
-                : 'playPauseBtn playMode'
-            }
-            alt="Play"
-            onClick={this.playPause.bind(this)}
-          >
-            <img className="pauseIcon" src={pauseButton} alt="" />
-            <img className="playIcon" src={playButton} alt="" />
-          </div>
-
-          <SoundComponent
-            ref={this.soundCompoRef}
-            playStatus={this.state.audioStatus}
-            url={this.state.audioUrl}
-            funcPerc={this.moveSeek.bind(this)}
-            desiredT={this.state.desiredTime}
-            volume={this.state.mute ? 0 : this.state.volume}
-          />
-          <div className="timer">
-            <span className="min">00</span> : <span className="sec">00</span>
-          </div>
-
-          <div className="volume-control">
-            <StyledIcon
-              className="volume-icon"
-              url={this.state.volumeIcon}
-              handleOnClick={this.toggleMute.bind(this)}
-            />
-            &nbsp;
-            <div className="volume-slider">
-              <StyledSlider
-                id="slider"
-                onChange={this.volumeChange}
-                step={1}
-                min={0}
-                max={100}
-                value={this.state.mute ? 0 : this.state.volume}
+            {[Sound.status.PLAYING, Sound.status.PAUSED].includes(
+              this.state.audioStatus
+            ) && (
+              <StyledIcon
+                className="resetIcon"
+                url={resetButton}
+                alt="reset"
+                handleOnClick={this.reset.bind(this)}
               />
+            )}
+
+            <div className="audioSeek">
+              <StyledProgressBar
+                id="seek"
+                percentage={this.state.seekCurrentPosition}
+              />
+              <div
+                className={
+                  this.state.pbuttonUrl === playButton
+                    ? 'playPauseBtn pauseMode'
+                    : 'playPauseBtn playMode'
+                }
+                alt="Play"
+                onClick={this.playPause.bind(this)}
+              >
+                <img className="pauseIcon" src={pauseButton} alt="" />
+                <img className="playIcon" src={playButton} alt="" />
+              </div>
             </div>
+
+            <div className="timer">00 : 00</div>
+
+            <div className="volume-control">
+              <StyledIcon
+                className="volume-icon"
+                url={this.state.volumeIcon}
+                handleOnClick={this.toggleMute.bind(this)}
+              />
+              &nbsp;
+              <div className="volume-slider">
+                <StyledSlider
+                  id="slider"
+                  onChange={this.volumeChange}
+                  step={1}
+                  min={0}
+                  max={100}
+                  value={this.state.mute ? 0 : this.state.volume}
+                />
+              </div>
+            </div>
+
+            <SoundComponent
+              ref={this.soundCompoRef}
+              playStatus={this.state.audioStatus}
+              url={this.state.audioUrl}
+              funcPerc={this.moveSeek.bind(this)}
+              desiredT={this.state.desiredTime}
+              volume={this.state.mute ? 0 : this.state.volume}
+            />
           </div>
-        </div>
-        <div className="audio-menu">{audioOptions}</div>
+          <div className="audio-menu">{audioOptions}</div>
+        </main>
       </div>
     )
   }
