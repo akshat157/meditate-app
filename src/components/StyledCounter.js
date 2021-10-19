@@ -6,7 +6,7 @@ function StyledCounter({ duration, setDuration, style }) {
   // unit of "duration" in minutes
 
   const incr = () => {
-    if (!(duration + 1 > 999)) setDuration(duration + 1)
+    if (!(duration + 1 > 120)) setDuration(duration + 1)
   }
 
   const decr = () => {
