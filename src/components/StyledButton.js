@@ -6,7 +6,7 @@ function StyledButton({
   onClick,
   isActive,
   buttonLabel,
-  className
+  className,
 }) {
   return (
     <button
