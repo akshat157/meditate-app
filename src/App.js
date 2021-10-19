@@ -8,9 +8,10 @@ import SoundComponent from './playSound'
 import {
   StyledProgressBar,
   StyledSlider,
-  StyledButton,
   BackgroundImage,
   StyledIcon,
+  StyledCounter,
+  StyledDropdown,
 } from './components'
 
 import {
@@ -38,21 +39,18 @@ class App extends Component {
     this.state = {
       pbuttonUrl: playButton,
       audioStatus: Sound.status.STOPPED,
-      timeValues: [120, 300, 600, 900],
-      audioNames: ['Rain', 'Forest', 'Park', 'Stream', 'Waves'],
+      audioNames: ['rain', 'forest', 'park', 'stream', 'waves'],
       seekCurrentPosition: 0,
       audioUrl: rainAudio, // Default
       bgImg: rainImg,
       desiredTime: 120, // Default
-      timeHovered: false,
       audioHovered: false,
       volume: 100, // Default
       mute: false, // Default
       volumeIcon: loudVolumeIcon,
-      opacity: 1, 
+      opacity: 1,
       transition: '',
       center_opacity: 1,
-
     }
     this.soundCompoRef = React.createRef()
   }
@@ -80,20 +78,19 @@ class App extends Component {
       })
     }
 
-    if ( this.state.pbuttonUrl === playButton ){
-      this.setState({ 
-        opacity: 0 ,
+    if (this.state.pbuttonUrl === playButton) {
+      this.setState({
+        opacity: 0,
         center_opacity: 0.6,
-        transition:'opacity 10s ease-out',
-      }) 
-    }else{
-      this.setState({ 
-        opacity: 1 ,
+        transition: 'opacity 10s ease-out',
+      })
+    } else {
+      this.setState({
+        opacity: 1,
         center_opacity: 1,
-        transition:'opacity 0s',
+        transition: 'opacity 0s',
       })
     }
-    
   }
 
   reset() {
@@ -107,50 +104,61 @@ class App extends Component {
   }
 
   _onMouseMove = (e) => {
-    this.setState({ 
-      opacity: 1 ,
-      transition:'opacity 0s',
+    this.setState({
+      opacity: 1,
+      transition: 'opacity 0s',
       center_opacity: 1,
     })
-    setTimeout( () => {
-      if (this.state.seekCurrentPosition < 100 && this.state.pbuttonUrl === pauseButton) {
-        this.setState({ 
-          opacity: 0 ,
-          transition:'opacity 10s ease-out',
-          center_opacity: 0.6 ,
+    setTimeout(() => {
+      if (
+        this.state.seekCurrentPosition < 100 &&
+        this.state.pbuttonUrl === pauseButton
+      ) {
+        this.setState({
+          opacity: 0,
+          transition: 'opacity 10s ease-out',
+          center_opacity: 0.6,
         })
       }
-    },3000)
+    }, 3000)
   }
 
-  audioSelect(name) {
-    var x = JSON.stringify(name.audioName).replace(/["]+/g, '')
+  audioSelect(audioName) {
+    switch (audioName) {
+      case this.state.audioNames[1]:
+        this.setState({
+          audioUrl: forestAudio,
+          bgImg: forestImg,
+        })
+        break
 
-    if (x === this.state.audioNames[1]) {
-      this.setState({
-        audioUrl: forestAudio,
-        bgImg: forestImg,
-      })
-    } else if (x === this.state.audioNames[2]) {
-      this.setState({
-        audioUrl: parkAudio,
-        bgImg: parkImg,
-      })
-    } else if (x === this.state.audioNames[3]) {
-      this.setState({
-        audioUrl: streamAudio,
-        bgImg: streamImg,
-      })
-    } else if (x === this.state.audioNames[4]) {
-      this.setState({
-        audioUrl: wavesAudio,
-        bgImg: wavesImg,
-      })
-    } else {
-      this.setState({
-        audioUrl: rainAudio,
-        bgImg: rainImg,
-      })
+      case this.state.audioNames[2]:
+        this.setState({
+          audioUrl: parkAudio,
+          bgImg: parkImg,
+        })
+        break
+
+      case this.state.audioNames[3]:
+        this.setState({
+          audioUrl: streamAudio,
+          bgImg: streamImg,
+        })
+        break
+
+      case this.state.audioNames[4]:
+        this.setState({
+          audioUrl: wavesAudio,
+          bgImg: wavesImg,
+        })
+        break
+
+      default:
+        this.setState({
+          audioUrl: rainAudio,
+          bgImg: rainImg,
+        })
+        break
     }
   }
 
@@ -165,12 +173,6 @@ class App extends Component {
         audioStatus: Sound.status.STOPPED,
       })
     }
-  }
-
-  handleTimeHover() {
-    this.setState({
-      timeHovered: !this.state.timeHovered,
-    })
   }
 
   handleAudioHover() {
@@ -204,93 +206,106 @@ class App extends Component {
   }
 
   render() {
-    const timeOptions = this.state.timeValues.map((duration) => (
-      <StyledButton
-        key={duration}
-        onMouseEnter={this.handleTimeHover.bind(this)}
-        onMouseLeave={this.handleTimeHover.bind(this)}
-        onClick={() => {
-          this.timeSelect({ duration })
-        }}
-        isActive={duration === this.state.desiredTime}
-        buttonLabel={`${duration / 60} Minutes`}
-      />
-    ))
+    const fadeTransition = {
+      opacity: this.state.opacity,
+      transition: this.state.transition,
+    }
 
-    const audioOptions = this.state.audioNames.map((audioName) => (
-      <StyledButton
-        key={audioName}
-        onMouseEnter={this.handleAudioHover.bind(this)}
-        onMouseLeave={this.handleAudioHover.bind(this)}
-        onClick={() => {
-          this.audioSelect({ audioName })
-        }}
-        isActive={
-          this.state.audioUrl === 'audio/' + audioName.toLowerCase() + '.mp3'
-        }
-        buttonLabel={audioName}
-      />
-    ))
+    const partialFadeTransition = {
+      opacity: this.state.center_opacity,
+      transition: this.state.transition,
+    }
 
+    const activeAudio = this.state.audioUrl
+      .replace('audio/', '')
+      .replace('.mp3', '')
+      .toLowerCase()
+
+    const isStopped = ![Sound.status.PLAYING, Sound.status.PAUSED].includes(
+      this.state.audioStatus
+    )
     return (
       <div className="App" onMouseMove={this._onMouseMove}>
         <div className="bg-overlay"></div>
         <BackgroundImage currentImage={this.state.bgImg} />
-        <div className="time-menu" style={{ opacity: this.state.opacity, transition: this.state.transition}}>{timeOptions}</div>
-        <div className="player-container">
-          <div className="reset" style={{ opacity: this.state.opacity, transition: this.state.transition}}>
-          {[Sound.status.PLAYING, Sound.status.PAUSED].includes(
-            this.state.audioStatus
-          ) && (
-            <StyledIcon
-              className="resetIcon"
-              url={resetButton}
-              alt="reset"
-              handleOnClick={this.reset.bind(this)}
+
+        <main className="main">
+          <div className="player-options">
+            <StyledCounter
+              setDuration={(duration) => {
+                // unit of "duration" is minutes
+                this.timeSelect({ duration: duration * 60 }) // convert minutes to seconds
+              }}
+              duration={this.state.desiredTime / 60} // unit of "desiredTime" is seconds, convert seconds to minutes
+              style={fadeTransition}
             />
-          )}
+            <StyledDropdown
+              options={this.state.audioNames}
+              style={!this.state.audioHovered ? fadeTransition : null}
+              activeOption={activeAudio}
+              changeOption={(audioName) => {
+                this.audioSelect(audioName)
+              }}
+              onMouseEnter={this.handleAudioHover.bind(this)}
+              onMouseLeave={this.handleAudioHover.bind(this)}
+            />
           </div>
 
-          <div className="audioSeek" style={{ opacity: this.state.center_opacity, transition: this.state.transition}}>
-            <StyledProgressBar
-              id="seek"
-              percentage={this.state.seekCurrentPosition}
-            />
+          <div className="middleWrap">
+            <div className="audioSeek" style={partialFadeTransition}>
+              <StyledProgressBar
+                id="seek"
+                percentage={this.state.seekCurrentPosition}
+              />
+              <div
+                style={partialFadeTransition}
+                className={
+                  this.state.pbuttonUrl === playButton
+                    ? 'playPauseBtn pauseMode'
+                    : 'playPauseBtn playMode'
+                }
+                alt="Play"
+                onClick={this.playPause.bind(this)}
+              >
+                <img className="pauseIcon" src={pauseButton} alt="" />
+                <img className="playIcon" src={playButton} alt="" />
+              </div>
+            </div>
+
+            <div className="timerWrap">
+              <StyledIcon
+                className="resetIcon"
+                src={resetButton}
+                alt="reset"
+                style={{
+                  ...partialFadeTransition,
+                  opacity: isStopped ? 0.4 : this.state.center_opacity,
+                  transform: isStopped && 'none',
+                  pointerEvents: isStopped && 'none',
+                }}
+                handleOnClick={this.reset.bind(this)}
+              />
+              <div className="timer" style={partialFadeTransition}>
+                <span className="min">00</span>
+                <span> : </span>
+                <span className="sec">00</span>
+              </div>
+            </div>
           </div>
           <div
-            style={{ opacity: this.state.center_opacity, transition: this.state.transition}}
-            className={
-              this.state.pbuttonUrl === playButton
-                ? 'playPauseBtn pauseMode'
-                : 'playPauseBtn playMode'
-            }
-            alt="Play"
-            onClick={this.playPause.bind(this)}
+            className="volume-control"
+            style={{
+              fadeTransition,
+            }}
           >
-            <img className="pauseIcon" src={pauseButton} alt="" />
-            <img className="playIcon" src={playButton} alt="" />
-          </div>
-
-          <SoundComponent
-            ref={this.soundCompoRef}
-            playStatus={this.state.audioStatus}
-            url={this.state.audioUrl}
-            funcPerc={this.moveSeek.bind(this)}
-            desiredT={this.state.desiredTime}
-            volume={this.state.mute ? 0 : this.state.volume}
-          />
-          <div className="timer">
-            <span className="min">00</span> : <span className="sec">00</span>
-          </div>
-
-          <div className="volume-control" style={{ opacity: this.state.opacity, transition: this.state.transition}}>
             <StyledIcon
               className="volume-icon"
-              url={this.state.volumeIcon}
+              src={this.state.volumeIcon}
               handleOnClick={this.toggleMute.bind(this)}
+              style={fadeTransition}
             />
             &nbsp;
-            <div className="volume-slider" style={{ opacity: this.state.opacity, transition: this.state.transition}}>
+            <div className="volume-slider" style={fadeTransition}>
               <StyledSlider
                 id="slider"
                 onChange={this.volumeChange}
@@ -301,8 +316,15 @@ class App extends Component {
               />
             </div>
           </div>
-        </div>
-        <div className="audio-menu" style={{ opacity: this.state.opacity, transition: this.state.transition}}>{audioOptions}</div>
+          <SoundComponent
+            ref={this.soundCompoRef}
+            playStatus={this.state.audioStatus}
+            url={this.state.audioUrl}
+            funcPerc={this.moveSeek.bind(this)}
+            desiredT={this.state.desiredTime}
+            volume={this.state.mute ? 0 : this.state.volume}
+          />
+        </main>
       </div>
     )
   }

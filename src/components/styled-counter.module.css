@@ -1,0 +1,72 @@
+.root {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  align-items: center;
+}
+
+.main {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+}
+
+.buttonWrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  height: 20px;
+  align-items: center;
+  cursor: pointer;
+}
+
+.buttonWrap:hover {
+  transform: scale(1.1);
+}
+
+.increase,
+.decrease {
+  width: 15px;
+  transform: rotateZ(90deg);
+  height: 10px;
+  user-select: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.increase {
+  transform: rotateZ(-90deg);
+}
+
+.display {
+  border-radius: 4px;
+  width: 40px;
+  height: 30px;
+  text-align: center;
+  outline: none;
+  border: none;
+  box-shadow: inset 0 0 5px #000000;
+  background-color: #ffffff42;
+  color: white;
+  font-family: monospace;
+  font-weight: bold;
+  pointer-events: none;
+}
+
+/* Remove number input spinners */
+/* Chrome, Safari, Edge, Opera */
+.display::-webkit-outer-spin-button,
+.display::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/* Firefox */
+.display {
+  -moz-appearance: textfield;
+}
+
+.minutes {
+  color: white;
+}
