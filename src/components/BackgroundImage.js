@@ -1,10 +1,11 @@
 import React from 'react'
+import styles from './../App.module.css'
 
 function BackgroundImage({ currentImage }) {
   const getClassName = (imgUrl) => {
-    let className = 'bg '
+    let className = styles.bg + ' '
     if (currentImage === imgUrl) {
-      className += 'activeBg'
+      className += styles.activeBg
     }
     return className
   }
