@@ -198,6 +198,16 @@ class App extends Component {
   }
 
   render() {
+    const fadeTransition = {
+      opacity: this.state.opacity,
+      transition: this.state.transition,
+    }
+
+    const partialFadeTransition = {
+      opacity: this.state.center_opacity,
+      transition: this.state.transition,
+    }
+
     const audioOptions = this.state.audioNames.map((audioName) => (
       <StyledButton
         key={audioName}
@@ -227,10 +237,7 @@ class App extends Component {
                 this.timeSelect({ duration: duration * 60 }) // convert minutes to seconds
               }}
               duration={this.state.desiredTime / 60} // unit of "desiredTime" is seconds, convert seconds to minutes
-              transitionStyle={{
-                opacity: this.state.opacity,
-                transition: this.state.transition,
-              }}
+              transitionStyle={fadeTransition}
             />
             <div className="middleWrap">
               <StyledIcon
@@ -244,28 +251,18 @@ class App extends Component {
                   ].includes(this.state.audioStatus)
                     ? 'visible'
                     : 'hidden',
-                  opacity: this.state.opacity,
-                  transition: this.state.transition,
+                  ...fadeTransition,
                 }}
                 handleOnClick={this.reset.bind(this)}
               />
 
-              <div
-                className="audioSeek"
-                style={{
-                  opacity: this.state.center_opacity,
-                  transition: this.state.transition,
-                }}
-              >
+              <div className="audioSeek" style={partialFadeTransition}>
                 <StyledProgressBar
                   id="seek"
                   percentage={this.state.seekCurrentPosition}
                 />
                 <div
-                  style={{
-                    opacity: this.state.center_opacity,
-                    transition: this.state.transition,
-                  }}
+                  style={partialFadeTransition}
                   className={
                     this.state.pbuttonUrl === playButton
                       ? 'playPauseBtn pauseMode'
@@ -278,13 +275,7 @@ class App extends Component {
                   <img className="playIcon" src={playButton} alt="" />
                 </div>
               </div>
-              <div
-                className="timer"
-                style={{
-                  opacity: this.state.center_opacity,
-                  transition: this.state.transition,
-                }}
-              >
+              <div className="timer" style={partialFadeTransition}>
                 <span className="min">00</span>
                 <span> : </span>
                 <span className="sec">00</span>
@@ -293,23 +284,17 @@ class App extends Component {
             <div
               className="volume-control"
               style={{
-                opacity: this.state.opacity,
-                transition: this.state.transition,
+                fadeTransition,
               }}
             >
               <StyledIcon
                 className="volume-icon"
                 src={this.state.volumeIcon}
                 handleOnClick={this.toggleMute.bind(this)}
+                style={fadeTransition}
               />
               &nbsp;
-              <div
-                className="volume-slider"
-                style={{
-                  opacity: this.state.opacity,
-                  transition: this.state.transition,
-                }}
-              >
+              <div className="volume-slider" style={fadeTransition}>
                 <StyledSlider
                   id="slider"
                   onChange={this.volumeChange}
@@ -329,13 +314,7 @@ class App extends Component {
               volume={this.state.mute ? 0 : this.state.volume}
             />
           </div>
-          <div
-            className="audio-menu"
-            style={{
-              opacity: this.state.opacity,
-              transition: this.state.transition,
-            }}
-          >
+          <div className="audio-menu" style={fadeTransition}>
             {audioOptions}
           </div>
         </main>
