@@ -2,11 +2,11 @@ import React from 'react'
 import { arrowButton } from '../constants'
 import style from './styled-counter.module.css'
 
-function StyledCounter({ duration, setDuration }) {
+function StyledCounter({ duration, setDuration, transitionStyle }) {
   // unit of "duration" in minutes
 
   const incr = () => {
-    if (!(duration + 1 > 999))setDuration(duration + 1)
+    if (!(duration + 1 > 999)) setDuration(duration + 1)
   }
 
   const decr = () => {
@@ -14,7 +14,7 @@ function StyledCounter({ duration, setDuration }) {
   }
 
   return (
-    <div className={style.root}>
+    <div className={style.root} style={transitionStyle}>
       <div className={style.main}>
         <span className={style.buttonWrap}>
           <img

@@ -48,6 +48,9 @@ class App extends Component {
       volume: 100, // Default
       mute: false, // Default
       volumeIcon: loudVolumeIcon,
+      opacity: 1,
+      transition: '',
+      center_opacity: 1,
     }
     this.soundCompoRef = React.createRef()
   }
@@ -74,6 +77,20 @@ class App extends Component {
         audioStatus: Sound.status.PAUSED,
       })
     }
+
+    if (this.state.pbuttonUrl === playButton) {
+      this.setState({
+        opacity: 0,
+        center_opacity: 0.6,
+        transition: 'opacity 10s ease-out',
+      })
+    } else {
+      this.setState({
+        opacity: 1,
+        center_opacity: 1,
+        transition: 'opacity 0s',
+      })
+    }
   }
 
   reset() {
@@ -84,6 +101,26 @@ class App extends Component {
       pbuttonUrl: playButton,
       audioStatus: Sound.status.STOPPED,
     })
+  }
+
+  _onMouseMove = (e) => {
+    this.setState({
+      opacity: 1,
+      transition: 'opacity 0s',
+      center_opacity: 1,
+    })
+    setTimeout(() => {
+      if (
+        this.state.seekCurrentPosition < 100 &&
+        this.state.pbuttonUrl === pauseButton
+      ) {
+        this.setState({
+          opacity: 0,
+          transition: 'opacity 10s ease-out',
+          center_opacity: 0.6,
+        })
+      }
+    }, 3000)
   }
 
   audioSelect(name) {
@@ -178,7 +215,7 @@ class App extends Component {
     ))
 
     return (
-      <div className="App">
+      <div className="App" onMouseMove={this._onMouseMove}>
         <div className="bg-overlay"></div>
         <BackgroundImage currentImage={this.state.bgImg} />
 
@@ -190,6 +227,10 @@ class App extends Component {
                 this.timeSelect({ duration: duration * 60 }) // convert minutes to seconds
               }}
               duration={this.state.desiredTime / 60} // unit of "desiredTime" is seconds, convert seconds to minutes
+              transitionStyle={{
+                opacity: this.state.opacity,
+                transition: this.state.transition,
+              }}
             />
             <div className="middleWrap">
               <StyledIcon
@@ -203,15 +244,28 @@ class App extends Component {
                   ].includes(this.state.audioStatus)
                     ? 'visible'
                     : 'hidden',
+                  opacity: this.state.opacity,
+                  transition: this.state.transition,
                 }}
                 handleOnClick={this.reset.bind(this)}
               />
-              <div className="audioSeek">
+
+              <div
+                className="audioSeek"
+                style={{
+                  opacity: this.state.center_opacity,
+                  transition: this.state.transition,
+                }}
+              >
                 <StyledProgressBar
                   id="seek"
                   percentage={this.state.seekCurrentPosition}
                 />
                 <div
+                  style={{
+                    opacity: this.state.center_opacity,
+                    transition: this.state.transition,
+                  }}
                   className={
                     this.state.pbuttonUrl === playButton
                       ? 'playPauseBtn pauseMode'
@@ -224,20 +278,38 @@ class App extends Component {
                   <img className="playIcon" src={playButton} alt="" />
                 </div>
               </div>
-              <div className="timer">
+              <div
+                className="timer"
+                style={{
+                  opacity: this.state.center_opacity,
+                  transition: this.state.transition,
+                }}
+              >
                 <span className="min">00</span>
                 <span> : </span>
                 <span className="sec">00</span>
               </div>
             </div>
-            <div className="volume-control">
+            <div
+              className="volume-control"
+              style={{
+                opacity: this.state.opacity,
+                transition: this.state.transition,
+              }}
+            >
               <StyledIcon
                 className="volume-icon"
                 src={this.state.volumeIcon}
                 handleOnClick={this.toggleMute.bind(this)}
               />
               &nbsp;
-              <div className="volume-slider">
+              <div
+                className="volume-slider"
+                style={{
+                  opacity: this.state.opacity,
+                  transition: this.state.transition,
+                }}
+              >
                 <StyledSlider
                   id="slider"
                   onChange={this.volumeChange}
@@ -257,7 +329,15 @@ class App extends Component {
               volume={this.state.mute ? 0 : this.state.volume}
             />
           </div>
-          <div className="audio-menu">{audioOptions}</div>
+          <div
+            className="audio-menu"
+            style={{
+              opacity: this.state.opacity,
+              transition: this.state.transition,
+            }}
+          >
+            {audioOptions}
+          </div>
         </main>
       </div>
     )
