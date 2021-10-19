@@ -42,11 +42,12 @@
 }
 
 .main {
-  display: flex;
+  display: grid;
   width: 100%;
   height: 450px;
-  justify-content: space-evenly;
-  align-items: center;
+  justify-content: center;
+  align-content: center;
+  gap: 35px;
 }
 
 .audioButton {
@@ -73,7 +74,7 @@
   font-size: 17px;
 }
 
-.player-container,
+.player-options,
 .audio-menu,
 .middleWrap {
   height: 100%;
@@ -83,8 +84,11 @@
   flex-direction: column;
 }
 
-.player-container {
+.player-options {
   position: relative;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 35px;
 }
 
 .audio-menu {
@@ -99,14 +103,17 @@
 .audioSeek {
   position: relative;
   min-width: 120px;
-  margin: 0 30px;
+  margin: 0 50px;
 }
 
 .resetIcon {
-  padding-bottom: 10px;
-  width: 50px;
+  padding-top: 5px;
+  width: 35px;
   cursor: pointer;
   transition: all 0.3s ease-out;
+  position: absolute;
+  top: -1px;
+  right: -43px;
 }
 .resetIcon:hover {
   transform: scale(1.1);
@@ -163,6 +170,14 @@
   transition: all 0.3s ease-out;
 }
 
+.timerWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-top: 10px;
+}
+
 .timer {
   font-family: 'Barlow', 'Maven Pro', sans-serif;
   width: 120px;
@@ -182,8 +197,8 @@
 .volume-control {
   display: flex;
   align-items: center;
+  justify-content: center;
   bottom: 0%;
-  margin-top: 35px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 32px;
   color: white;

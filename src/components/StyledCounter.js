@@ -1,8 +1,8 @@
 import React from 'react'
 import { arrowButton } from '../constants'
-import style from './styled-counter.module.css'
+import styles from './styled-counter.module.css'
 
-function StyledCounter({ duration, setDuration, transitionStyle }) {
+function StyledCounter({ duration, setDuration, style }) {
   // unit of "duration" in minutes
 
   const incr = () => {
@@ -14,27 +14,27 @@ function StyledCounter({ duration, setDuration, transitionStyle }) {
   }
 
   return (
-    <div className={style.root} style={transitionStyle}>
-      <div className={style.main}>
-        <span className={style.buttonWrap}>
+    <div className={styles.root} style={style}>
+      <div className={styles.main}>
+        <span className={styles.buttonWrap}>
           <img
-            className={style.increase}
+            className={styles.increase}
             src={arrowButton}
             alt="inc"
             onClick={incr}
           />
         </span>
-        <input className={style.display} type="number" value={duration} />
-        <span className={style.buttonWrap}>
+        <input className={styles.display} type="number" value={duration} />
+        <span className={styles.buttonWrap}>
           <img
-            className={style.decrease}
+            className={styles.decrease}
             src={arrowButton}
             alt="dec"
             onClick={decr}
           />
         </span>
       </div>
-      <p className={style.minutes}>Minutes</p>
+      <p className={styles.minutes}>Minutes</p>
     </div>
   )
 }
