@@ -45,6 +45,7 @@ class App extends Component {
       bgImg: rainImg,
       desiredTime: 120, // Default
       audioHovered: false,
+      counterHovered: false,
       volume: 100, // Default
       mute: false, // Default
       volumeIcon: loudVolumeIcon,
@@ -181,6 +182,12 @@ class App extends Component {
     })
   }
 
+  handleCounterHover() {
+    this.setState({
+      counterHovered: !this.state.counterHovered,
+    })
+  }
+
   volumeChange = (event) => {
     const value = Number(event.target.value)
     this.setState({
@@ -232,12 +239,16 @@ class App extends Component {
         <main className={styles.main}>
           <div className={styles['player-options']}>
             <StyledCounter
+              min={1} // 1minute
+              max={120} // 120mins
               setDuration={(duration) => {
                 // unit of "duration" is minutes
                 this.timeSelect({ duration: duration * 60 }) // convert minutes to seconds
               }}
               duration={this.state.desiredTime / 60} // unit of "desiredTime" is seconds, convert seconds to minutes
-              style={fadeTransition}
+              style={!this.state.counterHovered ? fadeTransition : null}
+              onMouseEnter={this.handleCounterHover.bind(this)}
+              onMouseLeave={this.handleCounterHover.bind(this)}
             />
             <StyledDropdown
               options={this.state.audioNames}
