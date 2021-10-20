@@ -3,42 +3,62 @@ import { arrowButton } from '../constants'
 import styles from './styled-counter.module.css'
 
 function StyledCounter(props) {
-  const { duration, setDuration } = props
+  const { duration, setDuration, min, max } = props
   // unit of "duration" in minutes
   const incrTimeoutID = useRef(null)
   const decrTimeoutID = useRef(null)
-
+  
   const getNewRate = (rate) => {
-    if (rate < 16) {
-      rate = rate * 2 //rate increases exponentially upto 16 only
-    } else {
-      rate = 16
-    }
+    switch (rate) {
+      case 1:
+        rate = 2
+        break
+      case 2:
+        rate = 5
+        break
+      case 5:
+        rate = 10
+        break
+      case 10:
+        rate = 15
+        break
 
+      default:
+        break
+    }
     return rate
-    
   }
 
   const incr = (rate, oldDuration) => {
-    const newDuration = oldDuration + rate
-    if (newDuration <= 999) {
+    let newDuration = oldDuration + rate
+    if (newDuration <= max) {
       incrTimeoutID.current = setTimeout(() => {
-        console.log('trigger up')
         setDuration(newDuration)
-        let newRate = getNewRate(rate)
-        incr(newRate, newDuration)
+        incr(getNewRate(rate), newDuration)
+      }, 450)
+    } else if (oldDuration + 1 <= max) {
+      rate = 1
+      newDuration = oldDuration + rate
+      incrTimeoutID.current = setTimeout(() => {
+        setDuration(newDuration)
+        incr(getNewRate(rate), newDuration)
       }, 450)
     }
   }
 
   const decr = (rate, oldDuration) => {
-    const newDuration = oldDuration - rate
-    if (newDuration >= 1) {
+    let newDuration = oldDuration - rate
+    if (newDuration >= min) {
       decrTimeoutID.current = setTimeout(() => {
-        console.log('trigger down')
         setDuration(newDuration)
-        let newRate = getNewRate(rate)
-        decr(newRate, newDuration)
+        decr(getNewRate(rate), newDuration)
+      }, 450)
+    } else if (oldDuration - 1 >= min) {
+      rate = 1
+      newDuration = oldDuration - rate
+      decrTimeoutID.current = setTimeout(() => {
+        setDuration(newDuration)
+        decr(getNewRate(rate), newDuration)
       }, 450)
     }
   }
@@ -51,7 +71,7 @@ function StyledCounter(props) {
             src={arrowButton}
             alt="inc"
             onMouseDown={() => {
-              duration + 1 <= 999 && setDuration(duration + 1)
+              duration + 1 <= max && setDuration(duration + 1)
               incr(1, duration)
             }}
             onMouseUp={() => clearTimeout(incrTimeoutID.current)}
@@ -65,7 +85,7 @@ function StyledCounter(props) {
             src={arrowButton}
             alt="dec"
             onMouseDown={() => {
-              duration - 1 >= 1 && setDuration(duration - 1)
+              duration - 1 >= min && setDuration(duration - 1)
               decr(1, duration)
             }}
             onMouseUp={() => clearTimeout(decrTimeoutID.current)}

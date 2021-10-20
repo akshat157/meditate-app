@@ -239,6 +239,8 @@ class App extends Component {
         <main className={styles.main}>
           <div className={styles['player-options']}>
             <StyledCounter
+              min={1} // 1minute
+              max={120} // 120mins
               setDuration={(duration) => {
                 // unit of "duration" is minutes
                 this.timeSelect({ duration: duration * 60 }) // convert minutes to seconds
