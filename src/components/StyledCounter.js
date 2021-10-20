@@ -1,16 +1,44 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { arrowButton } from '../constants'
 import styles from './styled-counter.module.css'
 
 function StyledCounter({ duration, setDuration, style }) {
   // unit of "duration" in minutes
+  const incrTimeoutID = useRef(null)
+  const decrTimeoutID = useRef(null)
 
-  const incr = () => {
-    if (!(duration + 1 > 120)) setDuration(duration + 1)
+  const getNewRate = (rate) => {
+    if (rate < 16) {
+      rate = rate * 2 //rate increases exponentially upto 16 only
+    } else {
+      rate = 16
+    }
+
+    return rate
   }
 
-  const decr = () => {
-    if (!(duration - 1 < 1)) setDuration(duration - 1)
+  const incr = (rate, oldDuration) => {
+    const newDuration = oldDuration + rate
+    if (newDuration <= 999) {
+      incrTimeoutID.current = setTimeout(() => {
+        console.log('trigger up')
+        setDuration(newDuration)
+        let newRate = getNewRate(rate)
+        incr(newRate, newDuration)
+      }, 450)
+    }
+  }
+
+  const decr = (rate, oldDuration) => {
+    const newDuration = oldDuration - rate
+    if (newDuration >= 1) {
+      decrTimeoutID.current = setTimeout(() => {
+        console.log('trigger down')
+        setDuration(newDuration)
+        let newRate = getNewRate(rate)
+        decr(newRate, newDuration)
+      }, 450)
+    }
   }
 
   return (
@@ -21,7 +49,12 @@ function StyledCounter({ duration, setDuration, style }) {
             className={styles.increase}
             src={arrowButton}
             alt="inc"
-            onClick={incr}
+            onMouseDown={() => {
+              duration + 1 <= 999 && setDuration(duration + 1)
+              incr(1, duration)
+            }}
+            onMouseUp={() => clearTimeout(incrTimeoutID.current)}
+            onMouseLeave={() => clearTimeout(incrTimeoutID.current)}
           />
         </span>
         <input className={styles.display} type="number" value={duration} />
@@ -30,7 +63,12 @@ function StyledCounter({ duration, setDuration, style }) {
             className={styles.decrease}
             src={arrowButton}
             alt="dec"
-            onClick={decr}
+            onMouseDown={() => {
+              duration - 1 >= 1 && setDuration(duration - 1)
+              decr(1, duration)
+            }}
+            onMouseUp={() => clearTimeout(decrTimeoutID.current)}
+            onMouseLeave={() => clearTimeout(decrTimeoutID.current)}
           />
         </span>
       </div>

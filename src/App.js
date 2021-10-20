@@ -237,7 +237,7 @@ class App extends Component {
                 this.timeSelect({ duration: duration * 60 }) // convert minutes to seconds
               }}
               duration={this.state.desiredTime / 60} // unit of "desiredTime" is seconds, convert seconds to minutes
-              style={fadeTransition}
+              // style={fadeTransition}
             />
             <StyledDropdown
               options={this.state.audioNames}
