@@ -16,21 +16,26 @@ class SoundComponent extends Component {
     this.setState({ position })
 
     var pos = position + this.state.loopCount * duration //loopCount to multiply for duration
-    const timerMin = document.querySelector('.timer .min')
-    const timerSec = document.querySelector('.timer .sec')
     var min = Math.floor(pos / (1000 * 60))
     var sec = Math.floor((pos / 1000) % 60)
 
     min = ('0' + min).slice(-2)
     sec = ('0' + sec).slice(-2)
 
-    timerMin.innerHTML = `${min}`
-    timerSec.innerHTML = `${sec}`
+    this.setTimerValues(min, sec)
     this.props.funcPerc(pos / 1000)
   }
 
   reset() {
     this.setState({ position: 0 })
+    this.setTimerValues('00', '00')
+  }
+
+  setTimerValues(min, sec) {
+    const timerMin = document.querySelector('.timer .min')
+    const timerSec = document.querySelector('.timer .sec')
+    timerMin.innerHTML = `${min}`
+    timerSec.innerHTML = `${sec}`
   }
 
   render() {
