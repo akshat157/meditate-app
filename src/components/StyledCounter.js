@@ -3,7 +3,7 @@ import { arrowButton } from '../constants'
 import styles from './styled-counter.module.css'
 
 function StyledCounter(props) {
-  const {duration, setDuration} = props;
+  const { duration, setDuration } = props
   // unit of "duration" in minutes
   const incrTimeoutID = useRef(null)
   const decrTimeoutID = useRef(null)
@@ -16,6 +16,7 @@ function StyledCounter(props) {
     }
 
     return rate
+    
   }
 
   const incr = (rate, oldDuration) => {
@@ -41,7 +42,6 @@ function StyledCounter(props) {
       }, 450)
     }
   }
-
   return (
     <div className={styles.root} {...props}>
       <div className={styles.main}>

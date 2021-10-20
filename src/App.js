@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Sound from 'react-sound'
 import 'react-circular-progressbar/dist/styles.css'
-import './App.css'
+import styles from './App.module.css'
 
 // import logo from './logo.svg';
 import SoundComponent from './playSound'
@@ -232,12 +232,12 @@ class App extends Component {
       this.state.audioStatus
     )
     return (
-      <div className="App" onMouseMove={this._onMouseMove}>
-        <div className="bg-overlay"></div>
+      <div className={styles.App} onMouseMove={this._onMouseMove}>
+        <div className={styles['bg-overlay']}></div>
         <BackgroundImage currentImage={this.state.bgImg} />
 
-        <main className="main">
-          <div className="player-options">
+        <main className={styles.main}>
+          <div className={styles['player-options']}>
             <StyledCounter
               setDuration={(duration) => {
                 // unit of "duration" is minutes
@@ -260,8 +260,8 @@ class App extends Component {
             />
           </div>
 
-          <div className="middleWrap">
-            <div className="audioSeek" style={partialFadeTransition}>
+          <div className={styles.middleWrap}>
+            <div className={styles.audioSeek} style={partialFadeTransition}>
               <StyledProgressBar
                 id="seek"
                 percentage={this.state.seekCurrentPosition}
@@ -270,20 +270,20 @@ class App extends Component {
                 style={partialFadeTransition}
                 className={
                   this.state.pbuttonUrl === playButton
-                    ? 'playPauseBtn pauseMode'
-                    : 'playPauseBtn playMode'
+                    ? `${styles.playPauseBtn} ${styles.pauseMode}`
+                    : `${styles.playPauseBtn} ${styles.playMode}`
                 }
                 alt="Play"
                 onClick={this.playPause.bind(this)}
               >
-                <img className="pauseIcon" src={pauseButton} alt="" />
-                <img className="playIcon" src={playButton} alt="" />
+                <img className={styles.pauseIcon} src={pauseButton} alt="" />
+                <img className={styles.playIcon} src={playButton} alt="" />
               </div>
             </div>
 
-            <div className="timerWrap">
+            <div className={styles.timerWrap}>
               <StyledIcon
-                className="resetIcon"
+                className={styles.resetIcon}
                 src={resetButton}
                 alt="reset"
                 style={{
@@ -294,27 +294,31 @@ class App extends Component {
                 }}
                 handleOnClick={this.reset.bind(this)}
               />
-              <div className="timer" style={partialFadeTransition}>
-                <span className="min">00</span>
+              <div className={styles.timer} style={partialFadeTransition}>
+                <span id="timer-min" className={styles.min}>
+                  00
+                </span>
                 <span> : </span>
-                <span className="sec">00</span>
+                <span id="timer-sec" className={styles.sec}>
+                  00
+                </span>
               </div>
             </div>
           </div>
           <div
-            className="volume-control"
+            className={styles['volume-control']}
             style={{
               fadeTransition,
             }}
           >
             <StyledIcon
-              className="volume-icon"
+              className={styles['volume-icon']}
               src={this.state.volumeIcon}
               handleOnClick={this.toggleMute.bind(this)}
               style={fadeTransition}
             />
             &nbsp;
-            <div className="volume-slider" style={fadeTransition}>
+            <div className={styles['volume-slider']} style={fadeTransition}>
               <StyledSlider
                 id="slider"
                 onChange={this.volumeChange}
