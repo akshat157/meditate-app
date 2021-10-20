@@ -32,8 +32,8 @@ class SoundComponent extends Component {
   }
 
   setTimerValues(min, sec) {
-    const timerMin = document.querySelector('.timer .min')
-    const timerSec = document.querySelector('.timer .sec')
+    const timerMin = document.getElementById('timer-min')
+    const timerSec = document.getElementById('timer-sec')
     timerMin.innerHTML = `${min}`
     timerSec.innerHTML = `${sec}`
   }

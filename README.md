@@ -44,7 +44,8 @@ Feel free to contributing to this project! Please read [CONTRIBUTING.md](https:/
 Shoutouts to
 
 - [Dev Ed](https://www.youtube.com/channel/UClb90NQQcskPUGDIXsQEz5Q)'s amazing [tutorial](https://www.youtube.com/watch?v=oMBXdZzYqEk) for the same project but using vanilla JS, HTML and CSS.
-- My friend [@Adi2612](https://github.com/Adi2612/) for helping me solve some major issues.
+- My friend [@Adi2612](https://github.com/Adi2612/) for helping me solve some major issues in the project's initial days.
 - Google, Stackoverflow and the whole open source community! <3
+- Each and every contributor who has created an issue, a pull request or even has just starred the repository! :)
 
 Do :star: the project if you find it good enough. Thanks!

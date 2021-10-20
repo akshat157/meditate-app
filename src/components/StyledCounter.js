@@ -7,10 +7,20 @@ function StyledCounter({ duration, setDuration, style }) {
 
   const incr = () => {
     if (!(duration + 1 > 120)) setDuration(duration + 1)
+    if ((duration + 1 < 15)) setDuration(duration + 1)
+    if ((duration + 1 > 15 && duration + 1 < 45)) setDuration(duration + 5)
+    if ((duration + 1 > 45 && duration + 1 < 120)) setDuration(duration + 15)
   }
 
   const decr = () => {
-    if (!(duration - 1 < 1)) setDuration(duration - 1)
+    if ((duration - 1 <= 0)) {
+        setDuration(1)
+    } else {
+        if (!(duration - 1 < 1)) setDuration(duration - 1)
+        if ((duration - 1 < 15)) setDuration(duration - 1)
+        if ((duration - 1 > 15 && duration - 1 < 45)) setDuration(duration - 5)
+        if ((duration - 1 > 45 && duration - 1 < 120)) setDuration(duration - 15)
+    }
   }
 
   return (
