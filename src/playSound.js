@@ -31,6 +31,10 @@ class SoundComponent extends Component {
 
   reset() {
     this.setState({ position: 0 })
+    const timerMin = document.getElementById('timer-min')
+    const timerSec = document.getElementById('timer-sec')
+    timerMin.innerHTML = '00'
+    timerSec.innerHTML = '00'
   }
 
   render() {
