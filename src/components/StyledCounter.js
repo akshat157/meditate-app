@@ -2,7 +2,8 @@ import React, { useRef } from 'react'
 import { arrowButton } from '../constants'
 import styles from './styled-counter.module.css'
 
-function StyledCounter({ duration, setDuration, style }) {
+function StyledCounter(props) {
+  const {duration, setDuration} = props;
   // unit of "duration" in minutes
   const incrTimeoutID = useRef(null)
   const decrTimeoutID = useRef(null)
@@ -42,7 +43,7 @@ function StyledCounter({ duration, setDuration, style }) {
   }
 
   return (
-    <div className={styles.root} style={style}>
+    <div className={styles.root} {...props}>
       <div className={styles.main}>
         <span className={styles.buttonWrap}>
           <img
