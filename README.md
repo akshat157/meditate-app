@@ -1,9 +1,16 @@
+# Meditation App
+
+## Overview
+This is a GitHub repository for the [meditate app](https://akshat157.github.io/meditate-app).
+
 A meditation app created on ReactJS and bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ![Application Preview](https://user-images.githubusercontent.com/34815179/137988914-854f984b-ffbd-446e-940c-b77a8edeb44f.png)
 
 ## How to run?
 
+
+### Install
 Clone the repository
 `git clone https://github.com/akshat157/meditate-app`<br>
 Change to the project directory
@@ -47,5 +54,9 @@ Shoutouts to
 - My friend [@Adi2612](https://github.com/Adi2612/) for helping me solve some major issues in the project's initial days.
 - Google, Stackoverflow and the whole open source community! <3
 - Each and every contributor who has created an issue, a pull request or even has just starred the repository! :)
+
+## License
+
+This project is [MIT](https://github.com/kefranabg/readme-md-generator/blob/master/LICENSE) licensed.
 
 Do :star: the project if you find it good enough. Thanks!
