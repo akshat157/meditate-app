@@ -1,4 +1,4 @@
-# Meditation App
+# Meditate App
 
 ## Overview
 This is a GitHub repository for the [meditate app](https://akshat157.github.io/meditate-app).
