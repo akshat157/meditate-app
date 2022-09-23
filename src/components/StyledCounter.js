@@ -35,14 +35,14 @@ function StyledCounter(props) {
       incrTimeoutID.current = setTimeout(() => {
         setDuration(newDuration)
         incr(getNewRate(rate), newDuration)
-      }, 450)
+      }, 250)
     } else if (oldDuration + 1 <= max) {
       rate = 1
       newDuration = oldDuration + rate
       incrTimeoutID.current = setTimeout(() => {
         setDuration(newDuration)
         incr(getNewRate(rate), newDuration)
-      }, 450)
+      }, 250)
     }
   }
 
@@ -52,14 +52,14 @@ function StyledCounter(props) {
       decrTimeoutID.current = setTimeout(() => {
         setDuration(newDuration)
         decr(getNewRate(rate), newDuration)
-      }, 450)
+      }, 250)
     } else if (oldDuration - 1 >= min) {
       rate = 1
       newDuration = oldDuration - rate
       decrTimeoutID.current = setTimeout(() => {
         setDuration(newDuration)
         decr(getNewRate(rate), newDuration)
-      }, 450)
+      }, 250)
     }
   }
   return (
