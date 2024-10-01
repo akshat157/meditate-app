@@ -1,13 +1,13 @@
 {
-  "homepage": "https://akshat157.github.io/meditate-app",
+  "homepage": "https://akshat157.github.io",
   "name": "meditate",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "react": "^16.8.6",
-    "react-circular-progressbar": "^1.0.0",
-    "react-dom": "^16.8.6",
-    "react-scripts": "5.0.1",
+    "react": "^18.3.1",
+    "react-circular-progressbar": "^2.1.0",
+    "react-dom": "^18.3.1",
+    "react-scripts": "^5.0.1",
     "react-sound": "^1.2.0"
   },
   "scripts": {

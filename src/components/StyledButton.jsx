@@ -1,13 +1,13 @@
 import React from 'react'
 
-function StyledButton({
+const StyledButton = ({
   onMouseEnter,
   onMouseLeave,
   onClick,
   isActive,
   buttonLabel,
   className,
-}) {
+}) => {
   return (
     <button
       onMouseEnter={onMouseEnter}
