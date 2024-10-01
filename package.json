@@ -29,7 +29,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "gh-pages": "^3.2.3",
+    "gh-pages": "^5.0.0",
     "prettier": "^2.4.1"
   }
 }
