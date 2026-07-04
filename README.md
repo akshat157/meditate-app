@@ -44,7 +44,7 @@ Your app is ready to be deployed!
 
 ## Contribute to this project
 
-Feel free to contributing to this project! Please read [CONTRIBUTING.md](https://github.com/akshat157/meditate-app/blob/master/CONTRIBUTING.md) to know the basic guidelines. :)
+Feel free to contributing to this project! Please read [CONTRIBUTING.md](https://github.com/akshat157/meditate-app/blob/main/CONTRIBUTING.md) to know the basic guidelines. :)
 
 ## Acknowledgments
 
